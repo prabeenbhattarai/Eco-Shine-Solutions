@@ -1,26 +1,445 @@
 @import "tailwindcss";
 
+/* Enable class-based dark mode (driven by next-themes) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --surface: #f3f7fd;
+  --surface-2: #eaf1fb;
+  --foreground: #0e1726;
+  --muted: #5b6b80;
+  --border: #e3e9f2;
+  --card: #ffffff;
+  --card-foreground: #0e1726;
+  --ring: #193cb9;
+}
+
+.dark {
+  --background: #0a0f1c;
+  --surface: #0f1626;
+  --surface-2: #131c30;
+  --foreground: #eef2f8;
+  --muted: #94a3b8;
+  --border: #1e293b;
+  --card: #111a2c;
+  --card-foreground: #eef2f8;
+  --ring: #6485f8;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-ring: var(--ring);
+
+  /* Brand blue scale, anchored on #193CB9 (brand-600) */
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dae5ff;
+  --color-brand-200: #bdd0ff;
+  --color-brand-300: #8fb0ff;
+  --color-brand-400: #5a84fb;
+  --color-brand-500: #345ef0;
+  --color-brand-600: #193cb9;
+  --color-brand-700: #1734a3;
+  --color-brand-800: #182e82;
+  --color-brand-900: #182a66;
+
+  /* Eco accent (subtle teal/emerald nods to the eco-friendly brand) */
+  --color-eco-400: #34d399;
+  --color-eco-500: #10b981;
+  --color-eco-600: #059669;
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-dm-sans);
+
+  --radius-card: 12px;
+  --radius-btn: 8px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--color-brand-600) 25%, transparent);
   }
 }
 
-body {
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 1024px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Brand gradients */
+  .bg-gradient-brand {
+    background-image: linear-gradient(135deg, #193cb9 0%, #2f6bed 100%);
+  }
+  .bg-gradient-brand-eco {
+    background-image: linear-gradient(135deg, #193cb9 0%, #2f6bed 55%, #0f9e8a 100%);
+  }
+  .bg-gradient-eco {
+    background-image: linear-gradient(120deg, #0ea5b9 0%, #14b8a6 55%, #10b981 100%);
+  }
+  .text-gradient-brand {
+    background-image: linear-gradient(135deg, #2f6bed 0%, #193cb9 60%, #182e82 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .dark .text-gradient-brand {
+    background-image: linear-gradient(135deg, #8fb0ff 0%, #5a84fb 60%, #345ef0 100%);
+  }
+}
+
+/* Trusted-by logo marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 26s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+/* Australia hex coverage map animations */
+@keyframes hex-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-hex-fade {
+  opacity: 0;
+  animation: hex-fade-in 0.5s ease-out forwards;
+}
+
+@keyframes hex-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  65% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.animate-hex-pop {
+  animation: hex-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes ring-pulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+.animate-ring-pulse {
+  animation: ring-pulse 2s ease-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hex-fade,
+  .animate-hex-pop {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-rise {
+  animation: fade-rise 0.4s ease-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-fade-in {
+  animation: fade-in 0.25s ease-out;
+}
+
+/* Scroll-reveal: elements start hidden and animate in when they enter view */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---- Preloader: "shine sweep" branded loader ---- */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  /* Failsafe: if JS never dismisses the overlay (bundle fails, hydration
+     stalls), CSS still fades it out so the page is always reachable. */
+  animation: pl-failsafe 0.5s ease 2600ms forwards;
+}
+@keyframes pl-failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+.preloader__bg {
+  position: absolute;
+  inset: 0;
   background: var(--background);
+  transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1);
+}
+.preloader__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.preloader--leaving {
+  pointer-events: none;
+}
+.preloader--leaving .preloader__bg {
+  transform: translateY(-100%);
+}
+.preloader--leaving .preloader__content {
+  opacity: 0;
+  transform: translateY(-12px);
+}
+
+.preloader__badge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+}
+/* spinning progress ring */
+.preloader__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0 62%,
+    #193cb9 86%,
+    #2f6bed 100%
+  );
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3px));
+  animation: pl-spin 1s linear infinite;
+}
+/* logo mark + sweeping glint */
+.preloader__mark {
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 47px;
+  animation: pl-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.preloader__mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.preloader__glint {
+  position: absolute;
+  inset: 0;
+  -webkit-mask: url(/images/ecoshine-logo-mark.png) center / contain no-repeat;
+  mask: url(/images/ecoshine-logo-mark.png) center / contain no-repeat;
+  background: linear-gradient(
+    115deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.92) 50%,
+    transparent 62%
+  );
+  background-size: 280% 100%;
+  animation: pl-shine 1.4s ease-in-out infinite;
+}
+.preloader__spark {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #2f6bed;
+  clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+}
+.preloader__spark--1 {
+  top: 4px;
+  right: 8px;
+  animation: pl-twinkle 1.6s ease-in-out infinite;
+}
+.preloader__spark--2 {
+  bottom: 6px;
+  left: 6px;
+  width: 10px;
+  height: 10px;
+  animation: pl-twinkle 1.6s ease-in-out 0.5s infinite;
+}
+.preloader__word {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  animation: pl-rise 0.6s 0.15s both ease-out;
+}
+.preloader__word b {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  font-size: 14px;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+.preloader__word i {
+  font-style: normal;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  color: var(--muted);
+}
+
+/* Reusable mini ring spinner (buttons, inline actions) */
+.brand-spinner {
+  display: inline-block;
+  border-radius: 9999px;
+  background: conic-gradient(from 0deg, transparent 0 25%, currentColor 100%);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px));
+  animation: pl-spin 0.7s linear infinite;
+}
+
+@keyframes pl-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pl-shine {
+  0% {
+    background-position: 165% 0;
+  }
+  100% {
+    background-position: -65% 0;
+  }
+}
+@keyframes pl-twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(90deg);
+  }
+}
+@keyframes pl-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes pl-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Honour reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
 }

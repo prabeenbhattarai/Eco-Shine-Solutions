@@ -4,7 +4,10 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Plus } from "lucide-react";
-import { services } from "@/lib/site";
+import { services as staticServices } from "@/lib/site";
+import type { PlainService } from "@/lib/content";
+
+const iconBySlug = Object.fromEntries(staticServices.map((s) => [s.slug, s.icon]));
 import { SectionHeading } from "@/components/section-heading";
 import { BrandSpinner } from "@/components/brand-spinner";
 
@@ -15,11 +18,11 @@ function ServiceCard({
   revealed = false,
   index = 0,
 }: {
-  service: (typeof services)[number];
+  service: PlainService;
   revealed?: boolean;
   index?: number;
 }) {
-  const Icon = service.icon;
+  const Icon = iconBySlug[service.slug];
   return (
     <Link
       href={service.href}
@@ -52,7 +55,7 @@ function ServiceCard({
   );
 }
 
-export function ServicesGrid() {
+export function ServicesGrid({ services }: { services: PlainService[] }) {
   const [expanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(false);
 

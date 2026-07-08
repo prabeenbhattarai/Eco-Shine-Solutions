@@ -1,15 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CheckCircle2, ArrowRight } from "lucide-react";
-import { trustPoints } from "@/lib/site";
+import { trustPoints, type StandardsContent } from "@/lib/site";
 import { PageCta } from "@/components/page-cta";
 import { ServiceExpertise } from "@/components/service-expertise";
+import { TeamStandards } from "@/components/team-standards";
 
 export function DetailPage({
   intro,
   image,
   imageAlt,
   expertiseContext,
+  standards,
   related,
   relatedLabel,
   ctaTitle,
@@ -19,6 +21,7 @@ export function DetailPage({
   image: string;
   imageAlt: string;
   expertiseContext: string;
+  standards: StandardsContent;
   related: { label: string; href: string }[];
   relatedLabel: string;
   ctaTitle: string;
@@ -55,6 +58,8 @@ export function DetailPage({
       </section>
 
       <ServiceExpertise context={expertiseContext} />
+
+      <TeamStandards standards={standards} />
 
       {related.length > 0 && (
         <section className="py-16">

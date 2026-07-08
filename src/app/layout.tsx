@@ -2,12 +2,6 @@ import type { Metadata } from "next";
 import { DM_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Preloader } from "@/components/preloader";
-import { QuoteProvider } from "@/components/quote/quote-context";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-import { WhatsAppFloat } from "@/components/whatsapp-float";
-import { MobileCtaBar } from "@/components/mobile-cta-bar";
 import { site, seoKeywords } from "@/lib/site";
 
 const inter = Inter({
@@ -64,16 +58,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Preloader />
-          <QuoteProvider>
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <WhatsAppFloat />
-            <MobileCtaBar />
-            {/* Spacer so the fixed mobile CTA bar never covers footer content */}
-            <div className="h-14 lg:hidden" aria-hidden="true" />
-          </QuoteProvider>
+          {children}
         </ThemeProvider>
       </body>
     </html>

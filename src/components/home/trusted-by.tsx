@@ -3,20 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-/* Real client logos. Drop files into public/images/logos/ using these exact
-   names and they'll pick up automatically. */
-const TRUSTED_LOGOS: { name: string; src: string }[] = [
-  { name: "OnePlayground", src: "/images/logos/oneplayground.png" },
-  { name: "M Collective", src: "/images/logos/m-logo.png" },
-  { name: "Jetstar", src: "/images/logos/jetstar.png" },
-];
+export type TrustedLogoItem = { src: string; name: string };
 
-// Repeat the base set so the strip has enough tiles to feel full, then
-// duplicate that once more so the marquee can loop seamlessly at -50%.
-const BASE = [...TRUSTED_LOGOS, ...TRUSTED_LOGOS, ...TRUSTED_LOGOS];
-const TRACK = [...BASE, ...BASE];
+export function TrustedBy({ logos }: { logos: TrustedLogoItem[] }) {
+  // Repeat the base set so the strip has enough tiles to feel full, then
+  // duplicate that once more so the marquee can loop seamlessly at -50%.
+  const base = [...logos, ...logos, ...logos];
+  const track = [...base, ...base];
 
-export function TrustedBy() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
 
@@ -57,7 +51,7 @@ export function TrustedBy() {
           className={`reveal ${inView ? "is-visible" : ""} flex w-max animate-marquee items-center gap-6 group-hover:[animation-play-state:paused]`}
         >
           {inView &&
-            TRACK.map((logo, i) => (
+            track.map((logo, i) => (
               <div
                 key={`${logo.name}-${i}`}
                 className="flex h-20 shrink-0 items-center justify-center rounded-xl bg-white px-7"

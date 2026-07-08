@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
-import { testimonials } from "@/lib/site";
 import { SectionHeading } from "@/components/section-heading";
 
 function initials(name: string) {
@@ -14,11 +13,20 @@ function initials(name: string) {
     .join("");
 }
 
-export function Testimonials() {
+export type TestimonialItem = {
+  id: string;
+  name: string;
+  role: string;
+  service: string;
+  rating: number;
+  text: string;
+};
+
+export function Testimonials({ items }: { items: TestimonialItem[] }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
-  const count = testimonials.length;
+  const count = items.length;
 
   const go = useCallback(
     (dir: number) => setIndex((i) => (i + dir + count) % count),
@@ -86,8 +94,8 @@ export function Testimonials() {
               className="flex transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${index * 100}%)` }}
             >
-              {testimonials.map((t) => (
-                <figure key={t.name} className="w-full shrink-0 px-1 sm:px-2">
+              {items.map((t) => (
+                <figure key={t.id} className="w-full shrink-0 px-1 sm:px-2">
                   <div className="relative overflow-hidden rounded-card border border-border bg-gradient-to-br from-card to-surface p-8 shadow-sm sm:p-10">
                     <Quote className="absolute right-6 top-6 h-24 w-24 text-brand-600/[0.06] dark:text-brand-300/10" />
 
@@ -140,9 +148,9 @@ export function Testimonials() {
 
           {/* Dots */}
           <div className="mt-6 flex items-center justify-center gap-2">
-            {testimonials.map((t, i) => (
+            {items.map((t, i) => (
               <button
-                key={t.name}
+                key={t.id}
                 type="button"
                 aria-label={`Go to testimonial ${i + 1}`}
                 aria-current={i === index}

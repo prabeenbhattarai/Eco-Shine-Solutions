@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { MapPin, ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
-import { states, services, type ServedState } from "@/lib/site";
+import { states, type ServedState } from "@/lib/site";
 import { HEX_POINTS } from "@/lib/hex-map";
 
 const HEX_SIZE = 12; // drawn radius, smaller than the 15px grid spacing so hexes sit apart
@@ -27,7 +27,7 @@ function statusColor(s: ServedState) {
   return s.status === "launching" ? "#f59e0b" : "#193cb9";
 }
 
-export function AustraliaCoverage() {
+export function AustraliaCoverage({ serviceNames }: { serviceNames: { slug: string; short: string }[] }) {
   const [activeCode, setActiveCode] = useState("NSW");
   const active = states.find((s) => s.code === activeCode) ?? states[1];
 
@@ -241,7 +241,7 @@ export function AustraliaCoverage() {
                 Services available
               </p>
               <ul className="mt-2 grid grid-cols-1 gap-1.5 sm:grid-cols-2">
-                {services.map((s) => (
+                {serviceNames.map((s) => (
                   <li key={s.slug} className="flex items-center gap-2 text-sm text-muted">
                     <CheckCircle2 className="h-4 w-4 shrink-0 text-eco-500" />
                     {s.short}

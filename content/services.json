@@ -1,0 +1,11 @@
+{
+  "overrides": {
+    "retail-cleaning": {
+      "title": "Retail Cleaning",
+      "short": "Retail Cleaning",
+      "blurb": "Routine cleaning and high-touch sanitisation for all customer-facing spaces.",
+      "image": "/images/commercial-floor-cleaning-sydney.jpg",
+      "imageAlt": "Ecoshine cleaner polishing a retail store floor"
+    }
+  }
+}

@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { site } from "@/lib/site";
 
-export function WhatsAppFloat() {
+export function WhatsAppFloat({ whatsapp }: { whatsapp: string }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -13,7 +12,7 @@ export function WhatsAppFloat() {
 
   return (
     <a
-      href={site.whatsapp}
+      href={whatsapp}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"

@@ -77,7 +77,14 @@ export const site = {
 export type NavItem = {
   label: string;
   href: string;
-  children?: { label: string; href: string; description?: string }[];
+  children?: {
+    label: string;
+    href: string;
+    description?: string;
+    /** Slug for service/sector children so the navbar can resolve icons
+        even after an admin renames the label. */
+    slug?: string;
+  }[];
 };
 
 /* Filter tabs on /services - order here is the tab order (before "All" is
@@ -741,6 +748,160 @@ export const expertisePoints: { icon: LucideIcon; title: string; text: string }[
     text: "Standards and reporting are coordinated across multiple sites and floors, so every location gets the same level of service.",
   },
 ];
+
+/* "Onsite team and industry standards" band on service/sector detail pages.
+   Content varies by service category or sector so every page speaks to the
+   specific compliance and safety expectations of that environment. */
+export type StandardsContent = {
+  eyebrow: string;
+  title: string;
+  text: string;
+  tagline: string;
+  image: string;
+  imageAlt: string;
+};
+
+export const serviceStandards: Record<ServiceCategory, StandardsContent> = {
+  "Sector Programs": {
+    eyebrow: "Inducted. Trained. Accountable.",
+    title: "Onsite Teams Trained for Your Environment",
+    text: "Every Ecoshine cleaner assigned to your site completes a full site induction and is trained for the specific demands of your industry, from hygiene zoning in clinical and childcare settings to presentation standards in customer-facing spaces. Police-checked, uniformed and fully insured, our teams work to your site rules and access requirements, with scheduling built around your operating hours, not ours.",
+    tagline: "The right people, properly trained, on every site.",
+    image: "/images/ecoshine-cleaning-team.jpg",
+    imageAlt: "Uniformed Ecoshine cleaning team ready for a site induction",
+  },
+  "Facilities Support": {
+    eyebrow: "Licensed. Insured. Reliable.",
+    title: "Facility Support That Meets Australian Standards",
+    text: "Our facilities support crews follow documented safe work procedures and Australian WHS regulations on every job. Minor repairs, consumable restocking and common-area upkeep are logged and reported, so building managers always know what was done, when and by whom, one accountable team instead of a patchwork of contractors.",
+    tagline: "One team, full accountability, zero guesswork.",
+    image: "/images/commercial-window-cleaning-sydney.jpg",
+    imageAlt: "Ecoshine facilities team servicing a commercial building",
+  },
+  "Grounds & Outdoor Services": {
+    eyebrow: "Safe. Seasonal. Scheduled.",
+    title: "Outdoor Crews Who Put Safety First",
+    text: "Grounds and waste crews operate with maintained equipment, documented safe work method statements and full public liability cover. Mowing, trimming, litter and bin cycles are planned as seasonal programs in advance, so your grounds stay presentable year-round without you having to chase anyone.",
+    tagline: "Presentable grounds, without the follow-up calls.",
+    image: "/images/ecoshine-uniform-harbour-bridge.jpg",
+    imageAlt: "Ecoshine team member working outdoors near Sydney Harbour",
+  },
+  "Cleaning & Hygiene": {
+    eyebrow: "Low-Tox. Colour-Coded. Certified.",
+    title: "Hygiene Practices That Prevent Cross-Contamination",
+    text: "We use eco-certified, low-tox products matched to each space, with hospital-grade disinfectants reserved for bathrooms and high-risk zones. Colour-coded microfibre systems and segregated equipment stop cross-contamination between areas, and every hygiene program is documented for your compliance records.",
+    tagline: "Clean that protects people, not just appearances.",
+    image: "/images/hospitality-cleaning-sydney.jpg",
+    imageAlt: "Ecoshine cleaner sanitising a customer-facing venue",
+  },
+  "Specialised & Project Cleaning": {
+    eyebrow: "High-Access. High-Pressure. Handover-Ready.",
+    title: "Project Crews Built for the Hard Jobs",
+    text: "Specialist works, from end-of-build cleans to high-access facade and pressure washing, run under documented safe work method statements with trained, insured operators. We coordinate directly with your builders and site managers so handovers happen on time and inspection-ready, the first time.",
+    tagline: "The right equipment, the right clearances, done right.",
+    image: "/images/window-cleaning-opera-house.jpg",
+    imageAlt: "Ecoshine specialist crew on a high-access window clean",
+  },
+};
+
+export const sectorStandards: Record<string, StandardsContent> = {
+  "corporate-offices-commercial": {
+    eyebrow: "Discreet. Presentable. After-Hours.",
+    title: "Office Cleaning Teams That Respect Your Workplace",
+    text: "Our corporate crews are security-aware, uniformed and trained to work discreetly around your people, with after-hours and early-morning scheduling that never interrupts business. Boardrooms, lobbies and workstations are held to strict presentation standards, and desk-level confidentiality is part of every induction.",
+    tagline: "Spotless by morning, invisible by day.",
+    image: "/images/office-cleaning-sydney.jpg",
+    imageAlt: "Ecoshine cleaner detailing a corporate office after hours",
+  },
+  "transport-logistics": {
+    eyebrow: "Inducted. Hi-Vis. Zero Disruption.",
+    title: "Crews Who Work Safely Around Live Operations",
+    text: "Depot and warehouse cleans run under full site inductions, hi-vis PPE and traffic-management awareness, so our crews work safely around forklifts, loading docks and vehicle movements. Scheduling is planned around your shifts and dispatch windows to keep freight moving while we work.",
+    tagline: "Clean depots that keep freight moving.",
+    image: "/images/ecoshine-brand-culture.jpg",
+    imageAlt: "Ecoshine cleaner prepared for a logistics site shift",
+  },
+  "education-childcare": {
+    eyebrow: "Child-Safe. Compliant. Cleared.",
+    title: "Cleaners You Can Trust Around Children",
+    text: "Every Ecoshine cleaner working in an education setting holds a current Working with Children Check where required, completes site induction and follows your child-safe policy. Low-tox, eco-certified products go into learning and play spaces, hospital-grade disinfectants into bathrooms and sick bays, and colour-coded equipment prevents cross-contamination between zones. Scheduling is built around bell times, not ours.",
+    tagline: "The right people, with the right clearances.",
+    image: "/images/ecoshine-cleaning-team.jpg",
+    imageAlt: "Police-checked Ecoshine cleaning team for education settings",
+  },
+  "industrial-manufacturing": {
+    eyebrow: "SWMS. PPE. Production-Safe.",
+    title: "Industrial Cleaning Without Stopping the Line",
+    text: "Plant and warehouse cleans run under documented safe work method statements, with PPE-compliant crews trained for production environments. We zone our work around your machinery, shifts and safety walkways, so quality and housekeeping standards go up without production ever slowing down.",
+    tagline: "Safety-first cleans that keep production moving.",
+    image: "/images/ecoshine-staff-portrait.jpg",
+    imageAlt: "Ecoshine cleaner equipped for an industrial site",
+  },
+  "fitness-lifestyle": {
+    eyebrow: "High-Touch. Hygiene-First. Daily.",
+    title: "Sanitisation Built Around Your Timetable",
+    text: "Gym and studio cleans target the touchpoints that matter: equipment grips, benches, mats and changerooms, using sweat-safe, low-tox products that protect members and surfaces alike. Early-morning and between-class scheduling keeps your floor open, and hygiene logs give you proof of every clean.",
+    tagline: "Every touchpoint, every day.",
+    image: "/images/ecoshine-team-member.jpg",
+    imageAlt: "Ecoshine cleaner sanitising fitness equipment",
+  },
+  "retail-hospitality": {
+    eyebrow: "Presentation. Speed. Discretion.",
+    title: "Customer-Ready Spaces, Before Doors Open",
+    text: "Front-of-house presentation drives revenue, so our retail and hospitality crews work to strict visual standards, with food-safe products in dining and prep-adjacent areas. Overnight and pre-open scheduling means your customers only ever see the result, never the process.",
+    tagline: "First impressions, professionally maintained.",
+    image: "/images/hospitality-cleaning-sydney.jpg",
+    imageAlt: "Ecoshine cleaner preparing a hospitality venue before opening",
+  },
+  "healthcare-aged-care": {
+    eyebrow: "Clinical. Zoned. Documented.",
+    title: "Hygiene Standards Healthcare Demands",
+    text: "Clinical and aged care sites are cleaned to risk-based zoning regimes, with hospital-grade disinfectants, colour-coded equipment and infection-control awareness built into every routine. Each clean is logged and reportable, supporting the accreditation and audit requirements your facility already works under.",
+    tagline: "Care-grade cleaning, clinically accountable.",
+    image: "/images/window-cleaning-opera-house.jpg",
+    imageAlt: "Ecoshine cleaner sanitising clinical glass surfaces",
+  },
+  "infrastructure-data-centre": {
+    eyebrow: "Controlled. Cleared. Precise.",
+    title: "Cleaning for Environments That Can't Fail",
+    text: "Critical infrastructure and data centre spaces demand controlled methods: escorted-access compliance, equipment-safe products and dust-minimising techniques around sensitive hardware. Our crews follow your access protocols exactly, and every visit is documented for your operational records.",
+    tagline: "Precision cleaning for critical spaces.",
+    image: "/images/commercial-window-cleaning-sydney.jpg",
+    imageAlt: "Ecoshine cleaner servicing a critical facility",
+  },
+  "strata-buildings": {
+    eyebrow: "Scheduled. Visible. Resident-Friendly.",
+    title: "Common Areas Residents Notice for the Right Reasons",
+    text: "Lobbies, lifts, corridors and carparks are cleaned on a published schedule your residents can rely on, by uniformed crews who are courteous around building traffic. Strata managers get clear reporting on completed work, so committee questions always have answers.",
+    tagline: "Buildings that feel looked after.",
+    image: "/images/strata-cleaning-sydney.jpg",
+    imageAlt: "Ecoshine cleaner maintaining a strata common area",
+  },
+  "mining-energy": {
+    eyebrow: "Site-Inducted. Compliant. Remote-Ready.",
+    title: "Crews Prepared for Demanding Sites",
+    text: "Mining and energy facilities run on strict safety systems, and our crews slot straight into them: full site inductions, PPE compliance and documented procedures on every visit. From site offices to crew facilities, we keep demanding environments clean without adding safety overhead.",
+    tagline: "Heavy-duty cleaning, safety-first.",
+    image: "/images/ecoshine-uniform-harbour-bridge.jpg",
+    imageAlt: "Ecoshine team member equipped for a demanding site",
+  },
+  "government-defense": {
+    eyebrow: "Vetted. Cleared. Accountable.",
+    title: "Teams You Can Clear for Sensitive Sites",
+    text: "Every cleaner is police-checked and we cooperate fully with your vetting and access-control requirements, including escorted access where mandated. Documented procedures and complete service records support the probity and audit standards public-sector facilities operate under.",
+    tagline: "Trusted teams for public trust.",
+    image: "/images/commercial-floor-cleaning-sydney.jpg",
+    imageAlt: "Ecoshine cleaner servicing a public building",
+  },
+  "events-venue-cleaning": {
+    eyebrow: "Fast. Flexible. Overnight.",
+    title: "Turnarounds That Meet Event Deadlines",
+    text: "Pre-event presentation cleans, overnight resets and post-event recoveries are staffed to surge when your calendar does. We coordinate with your venue and bump-in, bump-out schedules so the space is ready before the next crowd arrives, every time.",
+    tagline: "Venue reset before the next crowd arrives.",
+    image: "/images/hospitality-cleaning-sydney.jpg",
+    imageAlt: "Ecoshine crew resetting an events venue",
+  },
+};
 
 /* Reasons we win against other Australian cleaning companies. */
 export const advantages = [

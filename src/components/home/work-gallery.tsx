@@ -2,14 +2,15 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { GalleryGrid, type Shot } from "@/components/gallery-grid";
-import { galleryShots } from "@/lib/site";
+import { getGallery } from "@/lib/content";
 
-const shots: Shot[] = galleryShots.slice(0, 5).map((shot, i) => ({
-  ...shot,
-  span: i === 0 ? "sm:col-span-2 sm:row-span-2" : "",
-}));
+export async function WorkGallery() {
+  const gallery = await getGallery();
+  const shots: Shot[] = gallery.shots.slice(0, 5).map((shot, i) => ({
+    ...shot,
+    span: i === 0 ? "sm:col-span-2 sm:row-span-2" : "",
+  }));
 
-export function WorkGallery() {
   return (
     <section className="py-20">
       <div className="container-page">

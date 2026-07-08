@@ -1,0 +1,280 @@
+/* Blog content. Posts are stored newest-first; the first entry is the
+   featured article on /blog. Content is structured as typed blocks so pages
+   can render styled headings, paragraphs and lists without a markdown parser. */
+
+export type BlogBlock =
+  | { type: "p"; text: string }
+  | { type: "h2"; text: string }
+  | { type: "ul"; items: string[] };
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string; // ISO, for <time> and JSON-LD
+  dateLabel: string;
+  readTime: string;
+  image: string;
+  imageAlt: string;
+  blocks: BlogBlock[];
+};
+
+export const blogPosts: BlogPost[] = [
+  {
+    slug: "how-often-should-your-office-be-professionally-cleaned",
+    title: "How Often Should Your Office Be Professionally Cleaned?",
+    excerpt:
+      "Daily, weekly or somewhere in between? Here's how office size, headcount and foot traffic should shape your commercial cleaning schedule.",
+    category: "Office Cleaning",
+    date: "2026-07-01",
+    dateLabel: "1 July 2026",
+    readTime: "5 min read",
+    image: "/images/office-cleaning-sydney.jpg",
+    imageAlt: "Ecoshine cleaner servicing a Sydney office",
+    blocks: [
+      {
+        type: "p",
+        text: "There is no single right answer to how often an office should be professionally cleaned, but there is a right answer for your office. The schedule that keeps a two-person studio presentable will leave a fifty-desk workplace looking tired by Wednesday. Here is how we help clients across New South Wales, Western Australia and Tasmania work it out.",
+      },
+      { type: "h2", text: "Start with headcount and foot traffic" },
+      {
+        type: "p",
+        text: "People, not floor space, create most of the cleaning load. Kitchens, bathrooms and shared touchpoints degrade fastest, and they degrade in proportion to how many people use them. As a starting rule: offices under about 20 staff can usually hold their standard with two or three cleans a week, while anything above that, or any office that hosts clients regularly, benefits from a daily service.",
+      },
+      { type: "h2", text: "What a good weekly rhythm looks like" },
+      {
+        type: "ul",
+        items: [
+          "Daily: bathrooms, kitchens, bins, high-touch points like door handles and lift buttons.",
+          "Weekly: full vacuum and mop of all floors, desk and surface dusting, glass touch-ups.",
+          "Monthly: high dusting, vents, skirting boards and detailed edge work.",
+          "Quarterly or twice-yearly: carpet extraction, hard floor scrubbing and window cleans.",
+        ],
+      },
+      { type: "h2", text: "Signs your current schedule isn't keeping up" },
+      {
+        type: "p",
+        text: "Bins that are full before the next service, a kitchen that smells by mid-afternoon, or carpet lines that reappear within a day are all signals the frequency is set too low. Staff complaints are usually the last symptom, not the first, so it pays to act on the physical signs early.",
+      },
+      { type: "h2", text: "Match the schedule to your lease and budget" },
+      {
+        type: "p",
+        text: "A well-designed scope can move tasks between daily, weekly and monthly tiers so you pay for what actually matters in your space. That is exactly how we build Ecoshine cleaning programs: a written scope tailored to your office, reviewed against real results, with no lock-in contracts. If you would like a schedule recommendation for your workplace, request a free quote and we will assess it with you.",
+      },
+    ],
+  },
+  {
+    slug: "what-eco-friendly-cleaning-actually-means",
+    title: "What 'Eco-Friendly Cleaning' Actually Means (and What to Ask For)",
+    excerpt:
+      "Green claims are everywhere in commercial cleaning. Here's what genuinely eco-certified products and practices look like, and the questions that cut through the marketing.",
+    category: "Eco Cleaning",
+    date: "2026-06-24",
+    dateLabel: "24 June 2026",
+    readTime: "4 min read",
+    image: "/images/ecoshine-brand-culture.jpg",
+    imageAlt: "Ecoshine team member with eco-certified cleaning products",
+    blocks: [
+      {
+        type: "p",
+        text: "Almost every cleaning company in Australia now describes itself as eco-friendly. Some genuinely are. Others have simply added a leaf to the logo. If sustainability matters to your business, and increasingly it matters to your clients and staff too, here is how to tell the difference.",
+      },
+      { type: "h2", text: "Certified products, not green-tinted ones" },
+      {
+        type: "p",
+        text: "Genuine eco cleaning starts with independently certified, plant-based, low-tox products. Certification means the product's ingredients and manufacturing have been assessed against a published standard, not just labelled green by the brand that sells it. At Ecoshine, every general-purpose product we use is eco-certified, with hospital-grade disinfectants reserved for bathrooms and genuine high-risk zones where they are actually needed.",
+      },
+      { type: "h2", text: "Why low-tox matters indoors" },
+      {
+        type: "p",
+        text: "Harsh chemical residues do not stay on the surface, they end up in the air your team breathes for the next eight hours. Low-tox products dramatically reduce volatile compounds indoors, which is why they are now the default expectation in childcare centres, medical suites and modern offices alike. No harsh smells the next morning is not a luxury, it is a sign the job was done properly.",
+      },
+      { type: "h2", text: "Three questions to ask any cleaning provider" },
+      {
+        type: "ul",
+        items: [
+          "Which certifications do your standard products carry, and can you list the products you'll use on our site?",
+          "Where do you still use conventional disinfectants, and why?",
+          "How do you prevent cross-contamination between bathrooms and food areas?",
+        ],
+      },
+      {
+        type: "p",
+        text: "A provider doing eco cleaning properly can answer all three without hesitation. If you would like our answers in writing for your site, get in touch, we are happy to put them in the quote.",
+      },
+    ],
+  },
+  {
+    slug: "childcare-cleaning-checklist-for-centre-directors",
+    title: "The Childcare Cleaning Checklist Every Centre Director Needs",
+    excerpt:
+      "From nappy-change zones to bell-time scheduling, this is what a compliant, child-safe cleaning program covers in an Australian early learning centre.",
+    category: "Childcare & Education",
+    date: "2026-06-15",
+    dateLabel: "15 June 2026",
+    readTime: "6 min read",
+    image: "/images/ecoshine-cleaning-team.jpg",
+    imageAlt: "Ecoshine cleaning team trained for childcare environments",
+    blocks: [
+      {
+        type: "p",
+        text: "Cleaning an early learning centre is nothing like cleaning an office. Children put surfaces in their mouths, immune systems are still developing, and your assessors expect documented hygiene practices, not good intentions. Here is the checklist we build every childcare cleaning program around.",
+      },
+      { type: "h2", text: "People first: clearances and induction" },
+      {
+        type: "p",
+        text: "Every cleaner working in an education setting should hold a current Working with Children Check where required, complete your site induction, and understand your child-safe policy before their first shift. Consistency matters too: the same small, vetted team on every visit, not a rotating cast of strangers in your building.",
+      },
+      { type: "h2", text: "Zones that need daily attention" },
+      {
+        type: "ul",
+        items: [
+          "Nappy-change and toileting areas: hospital-grade disinfection, dedicated equipment, documented every visit.",
+          "Eating and food-prep areas: food-safe, low-tox products only.",
+          "Play and learning spaces: eco-certified products safe for mouthing-age children, toys and mats included.",
+          "Sick bay: disinfected daily and immediately after any illness event.",
+        ],
+      },
+      { type: "h2", text: "Colour-coding stops cross-contamination" },
+      {
+        type: "p",
+        text: "The cloth that wiped a bathroom must never touch a lunch table. Colour-coded microfibre systems and physically segregated equipment are the simplest, most auditable way to guarantee that, and they should be visible in your cleaner's kit, not just in their brochure.",
+      },
+      { type: "h2", text: "Schedule around bell times" },
+      {
+        type: "p",
+        text: "Cleaning should never compete with children for a space. A good provider builds the schedule around your session times, cleans learning rooms after pickup, and leaves bathrooms serviced right before the morning rush. If your current provider cannot describe your bell schedule, that is a conversation worth having, or we would be glad to have it with you instead.",
+      },
+    ],
+  },
+  {
+    slug: "end-of-lease-vs-builders-clean-whats-the-difference",
+    title: "End of Build vs Deep Clean: Which One Does Your Project Need?",
+    excerpt:
+      "Handover cleans and deep cleans get quoted interchangeably, but they're different jobs with different scopes. Here's how to order the right one.",
+    category: "Specialist Cleaning",
+    date: "2026-06-05",
+    dateLabel: "5 June 2026",
+    readTime: "4 min read",
+    image: "/images/window-cleaning-opera-house.jpg",
+    imageAlt: "Ecoshine specialist crew on a post-construction clean",
+    blocks: [
+      {
+        type: "p",
+        text: "We regularly get calls asking for a deep clean when the site actually needs an end-of-build clean, and the reverse. Ordering the wrong scope wastes money and, on construction projects, can delay handover. Here is the difference in plain terms.",
+      },
+      { type: "h2", text: "End-of-build: making construction disappear" },
+      {
+        type: "p",
+        text: "An end-of-build (builders) clean removes every trace of construction: plaster dust in every crevice, paint spots, stickers and film on glass, silicone smears, and the fine grit that settles on every horizontal surface. It is usually staged, a rough clean after trades finish, then a detail clean just before inspection, and it is judged against handover standards, not everyday cleanliness.",
+      },
+      { type: "h2", text: "Deep clean: resetting an occupied space" },
+      {
+        type: "p",
+        text: "A deep clean takes a working space back to its best condition: carpet extraction, hard floor scrubbing and sealing, high dusting, vents, and the buildup that routine cleaning never quite reaches. It is the right order for end-of-lease handbacks, post-illness resets, or any site where the routine schedule has slipped.",
+      },
+      { type: "h2", text: "How to scope it correctly" },
+      {
+        type: "ul",
+        items: [
+          "Construction or renovation just finished? You need an end-of-build clean, staged around your trades.",
+          "Occupied space that needs a reset? You need a deep clean, scheduled around your operations.",
+          "Vacating a leased premises? Ask for an end-of-lease deep clean scoped against your make-good clause.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Whichever your project needs, insist on a written scope before work starts. It protects your handover date, your bond, and your relationship with the next occupant. Send us your site details and we will scope it for free.",
+      },
+    ],
+  },
+  {
+    slug: "five-signs-its-time-to-switch-commercial-cleaning-providers",
+    title: "5 Signs It's Time to Switch Commercial Cleaning Providers",
+    excerpt:
+      "Slipping standards rarely announce themselves. These five signals tell you your cleaning contract is coasting, and what a better provider looks like.",
+    category: "Commercial Cleaning",
+    date: "2026-05-27",
+    dateLabel: "27 May 2026",
+    readTime: "5 min read",
+    image: "/images/commercial-window-cleaning-sydney.jpg",
+    imageAlt: "Ecoshine cleaner servicing a commercial building",
+    blocks: [
+      {
+        type: "p",
+        text: "Most businesses do not switch cleaning providers because of one disaster. They switch because of a slow slide: standards drift, communication thins out, and one day you realise you are managing your cleaner instead of the other way around. Here are the five signals we hear most often from clients who move to us.",
+      },
+      { type: "h2", text: "1. You've become the quality inspector" },
+      {
+        type: "p",
+        text: "If your staff are the ones noticing missed bins and dusty sills, the provider's own quality system has failed. Inspections, checklists and follow-ups are the provider's job, and the results should be reported to you, not discovered by you.",
+      },
+      { type: "h2", text: "2. Issues vanish into a black hole" },
+      {
+        type: "p",
+        text: "Raising the same problem twice is a red flag. A professional operation has a defined escalation path with response times, so a missed area on Tuesday is fixed by Wednesday and logged so it does not happen again.",
+      },
+      { type: "h2", text: "3. The team changes every week" },
+      {
+        type: "p",
+        text: "High cleaner turnover means nobody ever learns your site: which door sticks, which floor scratches, which meeting room must be perfect on Mondays. Consistent, police-checked crews are a mark of a provider that looks after its people, and your site benefits directly.",
+      },
+      { type: "h2", text: "4. The invoice and the scope don't match" },
+      {
+        type: "p",
+        text: "If you cannot point to a written scope that says exactly what you are paying for each visit, you have no way to hold anyone to it. Vague scopes protect the provider, written ones protect you.",
+      },
+      { type: "h2", text: "5. Lock-in terms are doing the retention work" },
+      {
+        type: "p",
+        text: "A provider confident in its service does not need a two-year exit clause to keep you. Ecoshine works with no lock-in contracts, if we stop earning the work, you are free to leave. That is the standard worth switching to, and switching is easier than most managers expect: a site walk, a written scope, and a start date.",
+      },
+    ],
+  },
+  {
+    slug: "strata-cleaning-what-owners-corporations-should-expect",
+    title: "Strata Cleaning: What Owners Corporations Should Expect",
+    excerpt:
+      "Lobbies, lifts, bins and carparks: a practical guide to scoping common-area cleaning that residents notice and committees can verify.",
+    category: "Strata & Residential",
+    date: "2026-05-18",
+    dateLabel: "18 May 2026",
+    readTime: "5 min read",
+    image: "/images/strata-cleaning-sydney.jpg",
+    imageAlt: "Ecoshine cleaner maintaining a strata building common area",
+    blocks: [
+      {
+        type: "p",
+        text: "Common-area cleaning is one of the most visible line items in a strata budget, every resident walks through the result twice a day. Yet many owners corporations inherit vague, decades-old scopes that nobody can actually verify. Here is what a modern strata cleaning arrangement should include.",
+      },
+      { type: "h2", text: "A scope residents can see working" },
+      {
+        type: "ul",
+        items: [
+          "Daily or scheduled: lobby glass, lift interiors, entrance mats and bin room turnover.",
+          "Weekly: full corridor vacuum, stairwell detail, carpark blow-down or sweep.",
+          "Periodic: high dusting, light fittings, pressure washing and window cleans by level.",
+        ],
+      },
+      { type: "h2", text: "Reporting the committee can rely on" },
+      {
+        type: "p",
+        text: "Committees change, and the cleaning contract should not depend on one member's memory. Ask for completed-work reports against the scope, so any committee member can check what was delivered before approving the next invoice. It also makes AGM questions about the cleaning budget five-minute conversations instead of hour-long ones.",
+      },
+      { type: "h2", text: "Crews that respect the building" },
+      {
+        type: "p",
+        text: "Strata cleaning happens around residents, not after hours in an empty office. Uniformed, police-checked cleaners who are courteous in lifts and careful with shared equipment protect the building's culture as much as its surfaces. Insurance matters too: confirm public liability cover in the provider's name before anyone touches your site.",
+      },
+      {
+        type: "p",
+        text: "If your building's scope has not been reviewed in a few years, we will review it for free and quote against it, with no lock-in contract on the other side.",
+      },
+    ],
+  },
+];
+
+export function getPost(slug: string) {
+  return blogPosts.find((p) => p.slug === slug);
+}

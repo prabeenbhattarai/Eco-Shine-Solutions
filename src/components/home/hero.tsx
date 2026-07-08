@@ -3,15 +3,21 @@ import { Star, Phone, ArrowRight, Leaf, MapPin } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 import { QuoteButton } from "@/components/quote/quote-button";
 import { TrustedBy } from "@/components/home/trusted-by";
-import { site } from "@/lib/site";
+import { getHomepage, getSettings, getTrustedLogos } from "@/lib/content";
 
-export function Hero() {
+export async function Hero() {
+  const [{ hero }, settings, logos] = await Promise.all([
+    getHomepage(),
+    getSettings(),
+    getTrustedLogos(),
+  ]);
+
   return (
     <section className="relative overflow-hidden">
       <div className="relative flex min-h-[600px] items-center overflow-hidden py-20 lg:min-h-[720px] lg:py-28">
         <Image
-          src="/images/hero-window-cleaning-sydney.jpg"
-          alt="Ecoshine cleaner delivering eco-friendly commercial cleaning"
+          src={hero.image}
+          alt={hero.imageAlt}
           fill
           priority
           sizes="100vw"
@@ -25,23 +31,18 @@ export function Hero() {
           <div className="max-w-xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
               <Leaf className="h-3.5 w-3.5" />
-              Eco-certified, insured and police-checked
+              {hero.badge}
             </span>
 
             <h1 className="mt-5 text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
-              Eco-Friendly{" "}
+              {hero.titlePre}{" "}
               <span className="bg-gradient-to-r from-brand-200 via-brand-300 to-white bg-clip-text text-transparent">
-                Commercial Cleaning
+                {hero.titleHighlight}
               </span>{" "}
-              Across Australia
+              {hero.titlePost}
             </h1>
 
-            <p className="mt-6 text-xl leading-relaxed text-white/85">
-              From childcare and healthcare to hospitality, offices and government sites,
-              our trusted local teams deliver eco-certified cleans using plant-based
-              products. Now servicing New South Wales, Western Australia and Tasmania,
-              with the ACT launching 1 July 2026.
-            </p>
+            <p className="mt-6 text-xl leading-relaxed text-white/85">{hero.description}</p>
 
             <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium text-white/90">
               <span className="inline-flex items-center gap-1.5">
@@ -69,11 +70,11 @@ export function Hero() {
             </div>
 
             <a
-              href={site.phoneHref}
+              href={settings.phoneHref}
               className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-white/85 hover:text-white"
             >
               <Phone className="h-4 w-4 text-brand-300" />
-              Or call us today on {site.phone}
+              Or call us today on {settings.phone}
             </a>
           </div>
         </div>
@@ -87,13 +88,14 @@ export function Hero() {
               ))}
             </div>
             <p className="mt-1 text-xs text-muted">
-              <span className="font-bold text-foreground">4.9 out of 5</span> from 300+ reviews
+              <span className="font-bold text-foreground">{hero.ratingValue}</span>{" "}
+              {hero.ratingNote}
             </p>
           </div>
         </div>
       </div>
 
-      <TrustedBy />
+      <TrustedBy logos={logos} />
     </section>
   );
 }

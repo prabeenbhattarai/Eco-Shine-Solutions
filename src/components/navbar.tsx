@@ -4,20 +4,42 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
-import { nav, services, sectors, overviewLinks, exploreLinks, site } from "@/lib/site";
+import {
+  services,
+  sectors,
+  overviewLinks,
+  exploreLinks,
+  type NavItem,
+} from "@/lib/site";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { QuoteButton } from "@/components/quote/quote-button";
 import type { LucideIcon } from "lucide-react";
 
-const childIconByLabel: Record<string, LucideIcon> = Object.fromEntries([
+/* Icons stay code-defined. Slug lookup survives admin renames of service and
+   sector labels; label lookup covers the static overview/explore menus. */
+const iconBySlug: Record<string, LucideIcon> = Object.fromEntries([
+  ...services.map((s) => [s.slug, s.icon]),
+  ...sectors.map((s) => [s.slug, s.icon]),
+]);
+const iconByLabel: Record<string, LucideIcon> = Object.fromEntries([
   ...overviewLinks.map((l) => [l.label, l.icon]),
-  ...services.map((s) => [s.short, s.icon]),
-  ...sectors.map((s) => [s.name, s.icon]),
   ...exploreLinks.map((l) => [l.label, l.icon]),
 ]);
 
-export function Navbar() {
+function childIcon(child: { label: string; slug?: string }): LucideIcon | undefined {
+  return child.slug ? iconBySlug[child.slug] : iconByLabel[child.label];
+}
+
+export function Navbar({
+  nav,
+  phone,
+  phoneHref,
+}: {
+  nav: NavItem[];
+  phone: string;
+  phoneHref: string;
+}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -78,7 +100,7 @@ export function Navbar() {
                     </p>
                     <div className="grid grid-cols-2 gap-1">
                       {item.children.slice(0, 7).map((child) => {
-                        const ChildIcon = childIconByLabel[child.label];
+                        const ChildIcon = childIcon(child);
                         return (
                           <Link
                             key={child.label}
@@ -241,11 +263,11 @@ export function Navbar() {
               Get a Free Quote
             </QuoteButton>
             <a
-              href={site.phoneHref}
+              href={phoneHref}
               className="mt-3 flex items-center justify-center gap-2 text-sm font-medium text-muted"
             >
               <Phone className="h-4 w-4" />
-              {site.phone}
+              {phone}
             </a>
           </div>
         </aside>

@@ -9,5 +9,149 @@
     "imageAlt": "Ecoshine cleaner delivering eco-friendly commercial cleaning",
     "ratingValue": "4.9 out of 5",
     "ratingNote": "from 300+ reviews"
+  },
+  "services": {
+    "eyebrow": "What we do",
+    "title": "Cleaning services for every sector",
+    "description": "From childcare and healthcare to hospitality, industrial and government sites. One reliable team, eco-certified products, and our satisfaction guarantee on every job."
+  },
+  "whyChoose": {
+    "eyebrow": "Why Ecoshine",
+    "title": "The cleaning team Australian businesses actually keep",
+    "description": "Plenty of cleaners promise the world and disappear after the first job. We pair genuine eco-credentials with the reliability and professionalism that keep clients with us for years.",
+    "badgeValue": "8+",
+    "badgeLabel": "years cleaning",
+    "advantages": [
+      "No lock-in contracts, ever",
+      "Free quotes within 2 hours",
+      "Eco-certified, low-tox products",
+      "Fully insured and police-checked",
+      "Same-day and after-hours options",
+      "Trusted across four states and territories"
+    ],
+    "trustPoints": [
+      {
+        "title": "Eco-Certified Products",
+        "text": "Plant-based, non-toxic supplies that are safe for kids, pets and staff."
+      },
+      {
+        "title": "Fully Insured",
+        "text": "Comprehensive public liability cover on every single job."
+      },
+      {
+        "title": "Police-Checked Staff",
+        "text": "Vetted, uniformed and trained cleaners you can trust in your space."
+      },
+      {
+        "title": "Satisfaction Guarantee",
+        "text": "Not happy with a clean? We come back and put it right at no cost."
+      },
+      {
+        "title": "Experienced",
+        "text": "8+ years of industry experience, our trained teams deliver reliable cleaning with a sharp eye for detail."
+      },
+      {
+        "title": "Professional",
+        "text": "Uniformed, trained cleaners who take full ownership of every job, every time."
+      },
+      {
+        "title": "Tailored & Flexible",
+        "text": "We design cleaning schedules and scopes of work that fit your business, not the other way around."
+      },
+      {
+        "title": "Reliable & Consistent",
+        "text": "Punctual service, clear communication and consistent results on every single visit."
+      }
+    ]
+  },
+  "ourDifference": {
+    "eyebrow": "Our Difference",
+    "title": "Reliable Cleaning, Backed by Real Accountability",
+    "description": "From eco-certified products to insured, police-checked teams, every Ecoshine clean is backed by clear communication and a satisfaction guarantee you can count on.",
+    "overlayTitle": "Consistent Service You Can Rely On",
+    "overlayText1": "Every site is managed by a dedicated local team, so you always know who is cleaning your space and when. Clear scheduling and direct communication mean nothing falls through the cracks.",
+    "overlayText2": "Backed by our satisfaction guarantee, if a clean ever falls short we will return and put it right at no extra cost, no questions asked.",
+    "stats": [
+      {
+        "value": "4.9/5",
+        "label": "Average Rating",
+        "text": "From 300+ verified customer reviews."
+      },
+      {
+        "value": "4",
+        "label": "States & Territories",
+        "text": "NSW, WA, TAS and ACT from July 2026."
+      },
+      {
+        "value": "2hr",
+        "label": "Average Quote Turnaround",
+        "text": "Fast, free quotes during business hours."
+      },
+      {
+        "value": "100%",
+        "label": "Eco-Certified Products",
+        "text": "Plant-based and safe for kids, pets and staff."
+      }
+    ]
+  },
+  "coverage": {
+    "eyebrow": "Where we clean",
+    "title": "Eco cleaning across four states and territories",
+    "description": "From our New South Wales home base, Ecoshine now serves Western Australia and Tasmania, with the ACT joining on 1 July 2026. Tap a location to see the cities we cover."
+  },
+  "howItWorks": {
+    "eyebrow": "How it works",
+    "title": "A spotless space in three simple steps",
+    "steps": [
+      {
+        "title": "Book Online",
+        "text": "Request a free quote in under a minute and tell us what you need cleaned."
+      },
+      {
+        "title": "We Clean",
+        "text": "Our insured, eco-equipped team arrives on time and gets the job done right."
+      },
+      {
+        "title": "You Enjoy",
+        "text": "Relax in a spotless space, backed by our satisfaction guarantee."
+      }
+    ]
+  },
+  "satisfaction": {
+    "title": "Satisfaction Guaranteed",
+    "text": "We're so confident that your building will be cleaned to the standard you deserve every time that we'll organise a follow-up clean if you're not 100% happy with our service."
+  },
+  "gallery": {
+    "eyebrow": "Our work",
+    "title": "Real teams, real results",
+    "description": "A look at the uniformed, professional crews who turn up for our clients every day. Click any photo for a closer look."
+  },
+  "testimonials": {
+    "eyebrow": "Testimonials",
+    "title": "Trusted right across Australia",
+    "description": "Real feedback from the businesses and families we clean for every week.",
+    "ratingLine": "4.9 out of 5 from 300+ reviews"
+  },
+  "faq": {
+    "eyebrow": "FAQs",
+    "title": "Frequently asked questions",
+    "description": "Everything you need to know before booking. Can't find your answer? Just contact us."
+  },
+  "leadCapture": {
+    "title": "Ready for Your Next Eco-Friendly Clean?",
+    "description": "Great cleaning should feel invisible, reliable, and always on time. Ecoshine's local teams use eco-certified products and back every job with our satisfaction guarantee. Book your free, no-obligation quote and see the difference for yourself.",
+    "buttonLabel": "Get a Quote"
+  },
+  "visible": {
+    "services": true,
+    "whyChoose": true,
+    "ourDifference": true,
+    "coverage": true,
+    "howItWorks": true,
+    "satisfaction": true,
+    "gallery": true,
+    "testimonials": true,
+    "faq": true,
+    "leadCapture": true
   }
 }

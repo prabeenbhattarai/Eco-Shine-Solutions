@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { MapPin, Sparkles } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
-import { getPageHero } from "@/lib/content";
-import { ComingSoon } from "@/components/coming-soon";
-import { states } from "@/lib/site";
+import { getPageHero, getServiceAreas } from "@/lib/content";
+import { PageCta } from "@/components/page-cta";
 
 export const metadata: Metadata = {
   title: "Cleaning Service Areas in NSW, WA, TAS and ACT",
@@ -12,11 +11,14 @@ export const metadata: Metadata = {
 };
 
 export default async function ServiceAreasPage() {
-  const pageHero = await getPageHero("service-areas", {
-    title: "Service Areas",
-    subtitle:
-      "Our local teams clean across four states and territories. Here is where you will find us.",
-  });
+  const [pageHero, areas] = await Promise.all([
+    getPageHero("service-areas", {
+      title: "Service Areas",
+      subtitle:
+        "Our local teams clean across four states and territories. Here is where you will find us.",
+    }),
+    getServiceAreas(),
+  ]);
 
   return (
     <>
@@ -27,8 +29,8 @@ export default async function ServiceAreasPage() {
       />
       <section className="container-page py-14">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {states.map((s) => (
-            <div key={s.code} className="rounded-card border border-border bg-card p-6">
+          {areas.map((s) => (
+            <div key={s.id} className="rounded-card border border-border bg-card p-6">
               <div className="flex flex-wrap items-center gap-2">
                 <h2 className="text-xl font-bold text-foreground">{s.name}</h2>
                 {s.isHq && (
@@ -58,8 +60,18 @@ export default async function ServiceAreasPage() {
             </div>
           ))}
         </div>
+
+        <p className="mx-auto mt-10 max-w-2xl text-center text-sm leading-relaxed text-muted">
+          Don&apos;t see your suburb listed? We cover many more areas across each state and
+          are always expanding. Get in touch and we&apos;ll confirm whether we service your
+          location.
+        </p>
       </section>
-      <ComingSoon note="An interactive coverage map and full suburb directory are coming soon. Not sure if we reach you yet? Just ask and we'll confirm." />
+
+      <PageCta
+        title="Ready to book a clean in your area?"
+        description="Tell us where you are and what you need cleaned. We'll send a free, no-obligation quote within 2 hours during business hours."
+      />
     </>
   );
 }

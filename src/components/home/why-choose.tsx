@@ -1,10 +1,18 @@
 import Image from "next/image";
-import { Check } from "lucide-react";
-import { trustPoints, advantages } from "@/lib/site";
+import { Check, Sparkles } from "lucide-react";
+import { trustPoints as trustPointIcons } from "@/lib/site";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
+import type { HomepageContent } from "@/lib/content";
 
-export function WhyChoose() {
+export function WhyChoose({ content }: { content: HomepageContent["whyChoose"] }) {
+  const { advantages, badgeValue, badgeLabel } = content;
+  // Icons stay code-defined; pair each editable trust point with its icon by
+  // position, falling back to a generic icon if the admin adds extra points.
+  const trustPoints = content.trustPoints.map((p, i) => ({
+    ...p,
+    icon: trustPointIcons[i]?.icon ?? Sparkles,
+  }));
   return (
     <section className="py-20">
       <div className="container-page">
@@ -21,22 +29,20 @@ export function WhyChoose() {
               />
             </div>
             <div className="absolute -right-3 -top-3 rounded-card bg-gradient-brand px-4 py-3 text-white shadow-lg sm:-right-5">
-              <p className="text-2xl font-bold leading-none">8+</p>
-              <p className="text-xs text-white/85">years cleaning</p>
+              <p className="text-2xl font-bold leading-none">{badgeValue}</p>
+              <p className="text-xs text-white/85">{badgeLabel}</p>
             </div>
           </div>
 
           <div>
             <span className="text-sm font-semibold uppercase tracking-wide text-brand-600 dark:text-brand-300">
-              Why Ecoshine
+              {content.eyebrow}
             </span>
             <h2 className="mt-2 text-3xl font-bold text-foreground sm:text-4xl">
-              The cleaning team Australian businesses actually keep
+              {content.title}
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
-              Plenty of cleaners promise the world and disappear after the first job.
-              We pair genuine eco-credentials with the reliability and professionalism
-              that keep clients with us for years.
+              {content.description}
             </p>
 
             <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">

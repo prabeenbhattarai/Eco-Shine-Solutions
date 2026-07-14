@@ -1,17 +1,17 @@
 import { ChevronDown } from "lucide-react";
-import { getFaqs } from "@/lib/content";
+import { getFaqs, type SectionHeadingContent } from "@/lib/content";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
 
-export async function Faq() {
+export async function Faq({ heading }: { heading: SectionHeadingContent }) {
   const faqs = await getFaqs();
   return (
     <section id="faq" className="scroll-mt-24 bg-surface py-20">
       <div className="container-page">
         <SectionHeading
-          eyebrow="FAQs"
-          title="Frequently asked questions"
-          description="Everything you need to know before booking. Can't find your answer? Just contact us."
+          eyebrow={heading.eyebrow}
+          title={heading.title}
+          description={heading.description}
         />
 
         <Reveal className="mx-auto mt-10 max-w-3xl divide-y divide-border rounded-card border border-border bg-card">

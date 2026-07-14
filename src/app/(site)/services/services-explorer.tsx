@@ -3,14 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  services as staticServices,
-  serviceCategories,
-  type ServiceCategory,
-} from "@/lib/site";
+import { serviceCategories, type ServiceCategory } from "@/lib/site";
+import { resolveIcon } from "@/lib/icons";
 import type { PlainService } from "@/lib/content";
-
-const iconBySlug = Object.fromEntries(staticServices.map((s) => [s.slug, s.icon]));
 
 const TABS = ["All", ...serviceCategories] as const;
 
@@ -43,7 +38,7 @@ export function ServicesExplorer({ services }: { services: PlainService[] }) {
 
       <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((s) => {
-          const Icon = iconBySlug[s.slug];
+          const Icon = resolveIcon(s.icon);
           return (
             <Link
               key={s.href}

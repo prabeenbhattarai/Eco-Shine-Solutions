@@ -4,13 +4,14 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { ShieldCheck } from "lucide-react";
 import { QuoteButton } from "@/components/quote/quote-button";
+import type { HomepageContent } from "@/lib/content";
 
 /**
  * "Satisfaction Guaranteed" promo band with a portrait that overflows the band
  * and a scroll-driven parallax: the portrait and badge drift at a different
  * rate than the page as the section passes through the viewport.
  */
-export function SatisfactionBand() {
+export function SatisfactionBand({ content }: { content: HomepageContent["satisfaction"] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const portraitRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
@@ -58,13 +59,10 @@ export function SatisfactionBand() {
           <div className="relative grid items-center gap-8 md:grid-cols-[1.5fr_1fr]">
             <div className="max-w-xl text-white">
               <h2 className="text-3xl font-bold sm:text-4xl lg:text-[2.75rem]">
-                Satisfaction Guaranteed
+                {content.title}
               </h2>
               <p className="mt-5 text-base leading-relaxed text-white/90 sm:text-lg">
-                We&apos;re so confident that your building will be cleaned to the
-                standard you deserve <strong className="font-bold text-white">every time</strong>{" "}
-                that we&apos;ll organise a follow-up clean if you&apos;re not{" "}
-                <strong className="font-bold text-white">100% happy with our service</strong>.
+                {content.text}
               </p>
               <QuoteButton
                 size="lg"

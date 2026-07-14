@@ -52,5 +52,5 @@ export async function destroyAdminSession(): Promise<void> {
 export async function requireAdmin(): Promise<void> {
   const jar = await cookies();
   const ok = await verifySession(secret(), jar.get(ADMIN_COOKIE)?.value);
-  if (!ok) redirect("/admin/login");
+  if (!ok) redirect("/ecoshine_admin_panel/login");
 }

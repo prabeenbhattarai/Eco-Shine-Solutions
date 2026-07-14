@@ -1,7 +1,16 @@
 import Image from "next/image";
 import { Quote } from "lucide-react";
-import { founders } from "@/lib/site";
+import type { Founder } from "@/lib/content";
 import { SectionHeading } from "@/components/section-heading";
+
+function initials(name: string) {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join("");
+}
 
 function LinkedInIcon({ className = "" }: { className?: string }) {
   return (
@@ -11,16 +20,24 @@ function LinkedInIcon({ className = "" }: { className?: string }) {
   );
 }
 
-export function Founders() {
+export function Founders({
+  founders,
+  eyebrow,
+  title,
+}: {
+  founders: Founder[];
+  eyebrow: string;
+  title: string;
+}) {
   return (
     <section id="founders" className="scroll-mt-24 py-20">
       <div className="container-page">
-        <SectionHeading eyebrow="Leadership" title="A Word From Our Founders" />
+        <SectionHeading eyebrow={eyebrow} title={title} />
 
         <div className="mx-auto mt-12 grid max-w-5xl gap-8 md:grid-cols-2">
           {founders.map((f) => (
             <figure
-              key={f.name}
+              key={f.id}
               className="flex flex-col items-center rounded-card border border-border bg-card p-8 text-center"
             >
               <div className="relative h-28 w-28 overflow-hidden rounded-full border-4 border-surface shadow-md">
@@ -34,7 +51,7 @@ export function Founders() {
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center bg-gradient-brand text-2xl font-bold text-white">
-                    {f.initials}
+                    {initials(f.name)}
                   </div>
                 )}
               </div>

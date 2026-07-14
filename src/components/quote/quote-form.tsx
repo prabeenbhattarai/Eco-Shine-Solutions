@@ -1,13 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { services, states } from "@/lib/site";
 import { BrandSpinner } from "@/components/brand-spinner";
+import { submitQuoteAction } from "@/app/(site)/actions";
+import type { SubmitState } from "@/lib/forms";
 
 const field =
   "h-11 w-full rounded-btn border border-border bg-background px-3.5 text-base text-foreground placeholder:text-muted focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-ring";
 const label = "mb-1.5 block text-sm font-medium text-foreground";
+
+const initialState: SubmitState = { ok: false };
 
 export function QuoteForm({
   onDone,
@@ -16,16 +20,9 @@ export function QuoteForm({
   onDone?: () => void;
   presetService?: string;
 }) {
-  const [status, setStatus] = useState<"idle" | "loading" | "done">("idle");
+  const [state, formAction, pending] = useActionState(submitQuoteAction, initialState);
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // No page reload. Wired to POST /api/quotes once the backend lands.
-    setStatus("loading");
-    setTimeout(() => setStatus("done"), 1100);
-  };
-
-  if (status === "done") {
+  if (state.ok) {
     return (
       <div className="flex flex-col items-center py-8 text-center">
         <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-eco-500/15 text-eco-600">
@@ -48,7 +45,12 @@ export function QuoteForm({
   }
 
   return (
-    <form onSubmit={onSubmit} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <form action={formAction} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {state.error && (
+        <p className="sm:col-span-2 rounded-btn border border-red-300 bg-red-50 px-3 py-2 text-sm font-medium text-red-700 dark:border-red-400/30 dark:bg-red-500/10 dark:text-red-300">
+          {state.error}
+        </p>
+      )}
       <div className="sm:col-span-2">
         <label className={label} htmlFor="q-name">
           Full name <span className="text-red-500">*</span>
@@ -138,10 +140,10 @@ export function QuoteForm({
 
       <button
         type="submit"
-        disabled={status === "loading"}
+        disabled={pending}
         className="col-span-1 mt-1 inline-flex h-12 items-center justify-center gap-2 rounded-btn bg-gradient-brand px-6 text-sm font-semibold text-white transition-all hover:brightness-110 active:scale-[0.97] disabled:opacity-70 sm:col-span-2"
       >
-        {status === "loading" ? (
+        {pending ? (
           <>
             <BrandSpinner size={18} /> Sending your request
           </>

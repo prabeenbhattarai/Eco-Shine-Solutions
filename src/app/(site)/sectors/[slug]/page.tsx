@@ -40,6 +40,17 @@ export default async function SectorPage({
     .slice(0, 3)
     .map((s) => ({ label: s.name, href: `/sectors/${s.slug}` }));
 
+  // Per-page overrides fall back to the computed defaults when left blank.
+  const p = sector.page ?? {};
+  const base = sectorStandards[sector.slug] ?? serviceStandards["Sector Programs"];
+  const standards = {
+    ...base,
+    eyebrow: p.standardsEyebrow || base.eyebrow,
+    title: p.standardsTitle || base.title,
+    text: p.standardsText || base.text,
+    tagline: p.standardsTagline || base.tagline,
+  };
+
   return (
     <>
       <PageHero
@@ -52,15 +63,21 @@ export default async function SectorPage({
         ]}
       />
       <DetailPage
-        intro={`${sector.blurb} Ecoshine's eco-certified, insured and police-checked teams tailor a cleaning program for every ${sector.name.toLowerCase()} site, backed by our satisfaction guarantee.`}
+        intro={
+          p.intro ||
+          `${sector.blurb} Ecoshine's eco-certified, insured and police-checked teams tailor a cleaning program for every ${sector.name.toLowerCase()} site, backed by our satisfaction guarantee.`
+        }
         image={sector.image}
         imageAlt={sector.imageAlt}
         expertiseContext={`${sector.name} Cleaning`}
-        standards={sectorStandards[sector.slug] ?? serviceStandards["Sector Programs"]}
+        standards={standards}
         related={related}
         relatedLabel="Other Sectors We Service"
-        ctaTitle={`Ready to Book a Clean for Your ${sector.name} Site?`}
-        ctaDescription="Tell us about your space and we'll send a tailored, no-obligation quote fast."
+        ctaTitle={p.ctaTitle || `Ready to Book a Clean for Your ${sector.name} Site?`}
+        ctaDescription={
+          p.ctaDescription ||
+          "Tell us about your space and we'll send a tailored, no-obligation quote fast."
+        }
       />
     </>
   );

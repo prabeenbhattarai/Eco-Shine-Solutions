@@ -11,11 +11,7 @@ export const metadata: Metadata = {
 
 export default async function ServicesPage() {
   const services = await getServices();
-  const plainServices = services.map((s) => {
-    const { icon, ...rest } = s;
-    void icon;
-    return rest;
-  });
+  const plainServices = services;
   const pageHero = await getPageHero("services", {
     title: "Our Professional Services",
     subtitle:

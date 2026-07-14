@@ -7,6 +7,12 @@ import {
   sectors as defaultSectors,
   testimonials as defaultTestimonials,
   faqs as defaultFaqs,
+  advantages as defaultAdvantages,
+  trustPoints as defaultTrustPoints,
+  differenceStats as defaultDifferenceStats,
+  howItWorks as defaultHowItWorks,
+  founders as defaultFounders,
+  states as defaultStates,
   type Service,
   type Sector,
 } from "@/lib/site";
@@ -20,13 +26,21 @@ export type SiteSettings = {
   phone: string;
   phoneSecondary: string;
   email: string;
+  website: string;
   whatsapp: string;
   address: string;
+  mapEmbed: string;
   footerBlurb: string;
   hours: { day: string; time: string }[];
   social: { facebook: string; instagram: string; linkedin: string };
   /** Derived, always recomputed from phone. */
   phoneHref: string;
+};
+
+export type SectionHeadingContent = {
+  eyebrow: string;
+  title: string;
+  description: string;
 };
 
 export type HomepageContent = {
@@ -41,7 +55,60 @@ export type HomepageContent = {
     ratingValue: string;
     ratingNote: string;
   };
+  services: SectionHeadingContent;
+  whyChoose: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    badgeValue: string;
+    badgeLabel: string;
+    advantages: string[];
+    trustPoints: { title: string; text: string }[];
+  };
+  ourDifference: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    overlayTitle: string;
+    overlayText1: string;
+    overlayText2: string;
+    stats: { value: string; label: string; text: string }[];
+  };
+  coverage: SectionHeadingContent;
+  howItWorks: {
+    eyebrow: string;
+    title: string;
+    steps: { title: string; text: string }[];
+  };
+  satisfaction: {
+    title: string;
+    text: string;
+  };
+  gallery: SectionHeadingContent;
+  testimonials: SectionHeadingContent & { ratingLine: string };
+  faq: SectionHeadingContent;
+  leadCapture: {
+    title: string;
+    description: string;
+    buttonLabel: string;
+  };
+  /** Per-section visibility. Missing key = visible. Hero always shows. */
+  visible: Record<string, boolean>;
 };
+
+/** Homepage sections that can be toggled on/off from the admin panel. */
+export const homepageSections = [
+  { key: "services", label: "Services grid" },
+  { key: "whyChoose", label: "Why choose us" },
+  { key: "ourDifference", label: "Our difference" },
+  { key: "coverage", label: "Australia coverage map" },
+  { key: "howItWorks", label: "How it works" },
+  { key: "satisfaction", label: "Satisfaction guarantee band" },
+  { key: "gallery", label: "Work gallery" },
+  { key: "testimonials", label: "Testimonials" },
+  { key: "faq", label: "FAQs" },
+  { key: "leadCapture", label: "Closing call-to-action" },
+] as const;
 
 export type GalleryContent = { shots: { src: string; alt: string }[] };
 
@@ -74,8 +141,10 @@ const defaultSettings: Omit<SiteSettings, "phoneHref"> = {
   phone: site.phone,
   phoneSecondary: site.phoneSecondary,
   email: site.email,
+  website: site.url,
   whatsapp: site.whatsapp,
   address: site.address,
+  mapEmbed: "",
   footerBlurb: `${site.tagline}. Eco-certified, fully insured and police-checked cleaning you can trust.`,
   hours: [...site.hours],
   social: { ...site.social },
@@ -94,6 +163,75 @@ const defaultHomepage: HomepageContent = {
     ratingValue: "4.9 out of 5",
     ratingNote: "from 300+ reviews",
   },
+  services: {
+    eyebrow: "What we do",
+    title: "Cleaning services for every sector",
+    description:
+      "From childcare and healthcare to hospitality, industrial and government sites. One reliable team, eco-certified products, and our satisfaction guarantee on every job.",
+  },
+  whyChoose: {
+    eyebrow: "Why Ecoshine",
+    title: "The cleaning team Australian businesses actually keep",
+    description:
+      "Plenty of cleaners promise the world and disappear after the first job. We pair genuine eco-credentials with the reliability and professionalism that keep clients with us for years.",
+    badgeValue: "8+",
+    badgeLabel: "years cleaning",
+    advantages: [...defaultAdvantages],
+    trustPoints: defaultTrustPoints.map((p) => ({ title: p.title, text: p.text })),
+  },
+  ourDifference: {
+    eyebrow: "Our Difference",
+    title: "Reliable Cleaning, Backed by Real Accountability",
+    description:
+      "From eco-certified products to insured, police-checked teams, every Ecoshine clean is backed by clear communication and a satisfaction guarantee you can count on.",
+    overlayTitle: "Consistent Service You Can Rely On",
+    overlayText1:
+      "Every site is managed by a dedicated local team, so you always know who is cleaning your space and when. Clear scheduling and direct communication mean nothing falls through the cracks.",
+    overlayText2:
+      "Backed by our satisfaction guarantee, if a clean ever falls short we will return and put it right at no extra cost, no questions asked.",
+    stats: [...defaultDifferenceStats],
+  },
+  coverage: {
+    eyebrow: "Where we clean",
+    title: "Eco cleaning across four states and territories",
+    description:
+      "From our New South Wales home base, Ecoshine now serves Western Australia and Tasmania, with the ACT joining on 1 July 2026. Tap a location to see the cities we cover.",
+  },
+  howItWorks: {
+    eyebrow: "How it works",
+    title: "A spotless space in three simple steps",
+    steps: defaultHowItWorks.map((s) => ({ title: s.title, text: s.text })),
+  },
+  satisfaction: {
+    title: "Satisfaction Guaranteed",
+    text: "We're so confident that your building will be cleaned to the standard you deserve every time that we'll organise a follow-up clean if you're not 100% happy with our service.",
+  },
+  gallery: {
+    eyebrow: "Our work",
+    title: "Real teams, real results",
+    description:
+      "A look at the uniformed, professional crews who turn up for our clients every day. Click any photo for a closer look.",
+  },
+  testimonials: {
+    eyebrow: "Testimonials",
+    title: "Trusted right across Australia",
+    description:
+      "Real feedback from the businesses and families we clean for every week.",
+    ratingLine: "4.9 out of 5 from 300+ reviews",
+  },
+  faq: {
+    eyebrow: "FAQs",
+    title: "Frequently asked questions",
+    description:
+      "Everything you need to know before booking. Can't find your answer? Just contact us.",
+  },
+  leadCapture: {
+    title: "Ready for Your Next Eco-Friendly Clean?",
+    description:
+      "Great cleaning should feel invisible, reliable, and always on time. Ecoshine's local teams use eco-certified products and back every job with our satisfaction guarantee. Book your free, no-obligation quote and see the difference for yourself.",
+    buttonLabel: "Get a Quote",
+  },
+  visible: {},
 };
 
 export async function getSettings(): Promise<SiteSettings> {
@@ -103,13 +241,29 @@ export async function getSettings(): Promise<SiteSettings> {
     ...defaultSettings,
     ...stored,
     phone,
+    website: stored.website || defaultSettings.website,
     phoneHref: `tel:+61${phone.replace(/\D/g, "").replace(/^0/, "")}`,
   };
 }
 
 export async function getHomepage(): Promise<HomepageContent> {
-  const stored = await readContent("homepage", defaultHomepage);
-  return { hero: { ...defaultHomepage.hero, ...stored.hero } };
+  const stored = await readContent<Partial<HomepageContent>>("homepage", defaultHomepage);
+  // Shallow-merge each section over its default so a stored partial (or an old
+  // hero-only file) still renders every section fully.
+  return {
+    hero: { ...defaultHomepage.hero, ...stored.hero },
+    services: { ...defaultHomepage.services, ...stored.services },
+    whyChoose: { ...defaultHomepage.whyChoose, ...stored.whyChoose },
+    ourDifference: { ...defaultHomepage.ourDifference, ...stored.ourDifference },
+    coverage: { ...defaultHomepage.coverage, ...stored.coverage },
+    howItWorks: { ...defaultHomepage.howItWorks, ...stored.howItWorks },
+    satisfaction: { ...defaultHomepage.satisfaction, ...stored.satisfaction },
+    gallery: { ...defaultHomepage.gallery, ...stored.gallery },
+    testimonials: { ...defaultHomepage.testimonials, ...stored.testimonials },
+    faq: { ...defaultHomepage.faq, ...stored.faq },
+    leadCapture: { ...defaultHomepage.leadCapture, ...stored.leadCapture },
+    visible: { ...defaultHomepage.visible, ...stored.visible },
+  };
 }
 
 export async function getGallery(): Promise<GalleryContent> {
@@ -152,6 +306,96 @@ export async function getAllPageHeroes(): Promise<Record<string, PageHeroContent
   return heroes;
 }
 
+/* ---------- about page ---------- */
+
+export type Founder = {
+  id: string;
+  name: string;
+  role: string;
+  quote: string;
+  image: string; // "" = show initials instead
+  linkedin: string;
+};
+
+export type AboutContent = {
+  storyEyebrow: string;
+  storyTitle: string;
+  storyBody1: string;
+  storyBody2: string;
+  storyImage: string;
+  storyImageAlt: string;
+  valuesEyebrow: string;
+  valuesTitle: string;
+  foundersEyebrow: string;
+  foundersTitle: string;
+  founders: Founder[];
+};
+
+const defaultAbout: AboutContent = {
+  storyEyebrow: "Our story",
+  storyTitle: "Cleaning done properly, the eco-friendly way",
+  storyBody1:
+    "Ecoshine Solution was founded on a belief that professional cleaning and caring for the environment should go hand in hand. What started as a small Sydney team has grown into a trusted operation servicing New South Wales, Western Australia and Tasmania, with the ACT joining on 1 July 2026.",
+  storyBody2:
+    "Across childcare, healthcare, hospitality, industrial, community and government sites, we bring the same promise to every job: eco-certified products, insured and police-checked staff, and a finish we stand behind with our satisfaction guarantee.",
+  storyImage: "/images/ecoshine-cleaning-team.jpg",
+  storyImageAlt:
+    "The Ecoshine Solution cleaning team in uniform by the Sydney Harbour Bridge",
+  valuesEyebrow: "What we stand for",
+  valuesTitle: "Values our clients can count on",
+  foundersEyebrow: "Leadership",
+  foundersTitle: "A Word From Our Founders",
+  founders: defaultFounders.map((f, i) => ({
+    id: `founder-${i + 1}`,
+    name: f.name,
+    role: f.role,
+    quote: f.quote,
+    image: f.image ?? "",
+    linkedin: f.linkedin,
+  })),
+};
+
+export async function getAbout(): Promise<AboutContent> {
+  const stored = await readContent<Partial<AboutContent>>("about", {});
+  return {
+    ...defaultAbout,
+    ...stored,
+    founders: Array.isArray(stored.founders) ? stored.founders : defaultAbout.founders,
+  };
+}
+
+/* ---------- service areas (the /service-areas page) ---------- */
+
+export type ServiceArea = {
+  id: string;
+  name: string;
+  status: "active" | "launching";
+  launchDate: string; // shown when status is "launching"
+  isHq: boolean;
+  tagline: string;
+  cities: string[];
+};
+
+/* Seeded from the code-defined states. Note: the homepage hex coverage map
+   stays code-driven (it needs fixed map geometry); this drives the editable
+   /service-areas page only. */
+const defaultServiceAreas: ServiceArea[] = defaultStates.map((s) => ({
+  id: s.code.toLowerCase(),
+  name: s.name,
+  status: s.status,
+  launchDate: s.launchDate ?? "",
+  isHq: s.isHq ?? false,
+  tagline: s.tagline,
+  cities: [...s.cities],
+}));
+
+export async function getServiceAreas(): Promise<ServiceArea[]> {
+  const { items } = await readContent<{ items: ServiceArea[] }>("service-areas", {
+    items: defaultServiceAreas,
+  });
+  return items;
+}
+
 /* ---------- services & sectors (text/image overrides over code defaults) ---------- */
 
 /** Editable fields of a service; slug, category and icon stay code-defined. */
@@ -170,15 +414,23 @@ export type SectorOverride = {
   imageAlt?: string;
 };
 
-/** Service without its icon component - safe to pass to client components. */
-export type PlainService = Omit<Service, "icon">;
-export type PlainSector = Omit<Sector, "icon">;
+/** Services/sectors are fully serializable now (icon is a string key), so they
+    can be passed straight to client components. */
+export type PlainService = Service;
+export type PlainSector = Sector;
+
+/* Stored shape: once an admin performs any create/update/delete we persist the
+   full list under `items`. Before that (or migrating from the old override-only
+   files) we seed from the code defaults and apply any legacy overrides. */
 
 export async function getServices(): Promise<Service[]> {
-  const { overrides } = await readContent<{ overrides: Record<string, ServiceOverride> }>(
-    "services",
-    { overrides: {} }
-  );
+  const stored = await readContent<{
+    items?: Service[];
+    overrides?: Record<string, ServiceOverride>;
+  }>("services", {});
+  if (Array.isArray(stored.items)) return stored.items;
+
+  const overrides = stored.overrides ?? {};
   return defaultServices.map((s) => {
     const o = overrides[s.slug];
     if (!o) return s;
@@ -194,10 +446,13 @@ export async function getServices(): Promise<Service[]> {
 }
 
 export async function getSectors(): Promise<Sector[]> {
-  const { overrides } = await readContent<{ overrides: Record<string, SectorOverride> }>(
-    "sectors",
-    { overrides: {} }
-  );
+  const stored = await readContent<{
+    items?: Sector[];
+    overrides?: Record<string, SectorOverride>;
+  }>("sectors", {});
+  if (Array.isArray(stored.items)) return stored.items;
+
+  const overrides = stored.overrides ?? {};
   return defaultSectors.map((s) => {
     const o = overrides[s.slug];
     if (!o) return s;
@@ -269,4 +524,27 @@ export async function getBlogCategories(): Promise<string[]> {
   for (const s of services) set.add(s.short);
   for (const s of sectors) set.add(s.name);
   return [...set];
+}
+
+/* ---------- form submissions (contact + quote requests) ---------- */
+
+export type Submission = {
+  id: string;
+  kind: "contact" | "quote";
+  createdAt: string; // ISO
+  read: boolean;
+  name: string;
+  email: string;
+  phone: string;
+  /** Free-form label describing what they need (subject or service). */
+  subject: string;
+  message: string;
+  /** Extra structured fields, e.g. company, state, suburb. */
+  meta: Record<string, string>;
+};
+
+export async function getSubmissions(): Promise<Submission[]> {
+  const { items } = await readContent<{ items: Submission[] }>("submissions", { items: [] });
+  // Newest first.
+  return [...items].sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
 }

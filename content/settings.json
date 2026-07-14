@@ -1,0 +1,29 @@
+{
+  "phone": "0451 930 257",
+  "phoneSecondary": "0403 036 265",
+  "email": "info@ecoshinesolution.com.au",
+  "website": "https://www.ecoshinesolution.com.au",
+  "whatsapp": "https://wa.me/61451930257",
+  "address": "Sydney, NSW, Australia",
+  "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.9272339306704!2d151.08557967605466!3d-33.868607619049506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12bb2601dd122b%3A0x4b2004d1166b78f8!2s8%20Homebush%20Rd%2C%20Strathfield%20NSW%202135!5e1!3m2!1sen!2sau!4v1783771898284!5m2!1sen!2sau",
+  "footerBlurb": "Eco-Friendly Commercial Cleaning Across Australia. Eco-certified, fully insured and police-checked cleaning you can trust.",
+  "hours": [
+    {
+      "day": "Monday to Friday",
+      "time": "7:00am to 6:00pm"
+    },
+    {
+      "day": "Saturday",
+      "time": "8:00am to 4:00pm"
+    },
+    {
+      "day": "Sunday",
+      "time": "Closed"
+    }
+  ],
+  "social": {
+    "facebook": "#",
+    "instagram": "#",
+    "linkedin": "#"
+  }
+}

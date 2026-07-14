@@ -2,9 +2,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { GalleryGrid, type Shot } from "@/components/gallery-grid";
-import { getGallery } from "@/lib/content";
+import { getGallery, type SectionHeadingContent } from "@/lib/content";
 
-export async function WorkGallery() {
+export async function WorkGallery({ heading }: { heading: SectionHeadingContent }) {
   const gallery = await getGallery();
   const shots: Shot[] = gallery.shots.slice(0, 5).map((shot, i) => ({
     ...shot,
@@ -15,9 +15,9 @@ export async function WorkGallery() {
     <section className="py-20">
       <div className="container-page">
         <SectionHeading
-          eyebrow="Our work"
-          title="Real teams, real results"
-          description="A look at the uniformed, professional crews who turn up for our clients every day. Click any photo for a closer look."
+          eyebrow={heading.eyebrow}
+          title={heading.title}
+          description={heading.description}
         />
 
         <div className="mt-12">

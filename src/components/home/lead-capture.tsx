@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import type { HomepageContent } from "@/lib/content";
 
-export function LeadCapture() {
+export function LeadCapture({ content }: { content: HomepageContent["leadCapture"] }) {
   return (
     <section className="py-20">
       <div className="container-page">
@@ -11,19 +12,17 @@ export function LeadCapture() {
 
           <div className="relative max-w-xl">
             <h2 className="text-3xl font-bold leading-tight text-white sm:text-4xl">
-              Ready for Your Next Eco-Friendly Clean?
+              {content.title}
             </h2>
             <p className="mt-4 text-base leading-relaxed text-white/85">
-              Great cleaning should feel invisible, reliable, and always on time. Ecoshine&apos;s
-              local teams use eco-certified products and back every job with our satisfaction
-              guarantee. Book your free, no-obligation quote and see the difference for yourself.
+              {content.description}
             </p>
 
             <Link
               href="/quote"
               className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-7 text-sm font-semibold text-brand-700 transition-all hover:brightness-95 active:scale-[0.97]"
             >
-              Get a Quote
+              {content.buttonLabel}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

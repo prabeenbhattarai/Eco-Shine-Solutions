@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "@/components/page-hero";
-import { getPageHero } from "@/lib/content";
+import { getPageHero, getAbout } from "@/lib/content";
 import { Founders } from "@/components/founders";
 import { SectionHeading } from "@/components/section-heading";
 import { ButtonLink } from "@/components/ui/button";
@@ -14,11 +14,14 @@ export const metadata: Metadata = {
 };
 
 export default async function AboutPage() {
-  const pageHero = await getPageHero("about", {
-    title: "About Ecoshine Solution",
-    subtitle:
-      "Eco-conscious, professional and affordable cleaning trusted by businesses and communities across Australia.",
-  });
+  const [pageHero, about] = await Promise.all([
+    getPageHero("about", {
+      title: "About Ecoshine Solution",
+      subtitle:
+        "Eco-conscious, professional and affordable cleaning trusted by businesses and communities across Australia.",
+    }),
+    getAbout(),
+  ]);
 
   return (
     <>
@@ -34,8 +37,8 @@ export default async function AboutPage() {
           <div className="relative">
             <div className="relative aspect-[4/3] overflow-hidden rounded-card border border-border shadow-lg">
               <Image
-                src="/images/ecoshine-cleaning-team.jpg"
-                alt="The Ecoshine Solution cleaning team in uniform by the Sydney Harbour Bridge"
+                src={about.storyImage}
+                alt={about.storyImageAlt}
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover"
@@ -44,24 +47,15 @@ export default async function AboutPage() {
           </div>
           <div>
             <span className="text-sm font-semibold uppercase tracking-wide text-brand-600 dark:text-brand-300">
-              Our story
+              {about.storyEyebrow}
             </span>
             <h2 className="mt-2 text-3xl font-bold text-foreground sm:text-4xl">
-              Cleaning done properly, the eco-friendly way
+              {about.storyTitle}
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted">
-              Ecoshine Solution was founded on a belief that professional cleaning and
-              caring for the environment should go hand in hand. What started as a
-              small Sydney team has grown into a trusted operation servicing New South
-              Wales, Western Australia and Tasmania, with the ACT joining on 1 July
-              2026.
-            </p>
-            <p className="mt-4 text-base leading-relaxed text-muted">
-              Across childcare, healthcare, hospitality, industrial, community and
-              government sites, we bring the same promise to every job: eco-certified
-              products, insured and police-checked staff, and a finish we stand behind
-              with our satisfaction guarantee.
-            </p>
+            <p className="mt-4 text-base leading-relaxed text-muted">{about.storyBody1}</p>
+            {about.storyBody2 && (
+              <p className="mt-4 text-base leading-relaxed text-muted">{about.storyBody2}</p>
+            )}
             <ButtonLink href="/quote" className="mt-8">
               Get a Free Quote
             </ButtonLink>
@@ -72,10 +66,7 @@ export default async function AboutPage() {
       {/* Values */}
       <section id="values" className="scroll-mt-24 bg-surface py-20">
         <div className="container-page">
-          <SectionHeading
-            eyebrow="What we stand for"
-            title="Values our clients can count on"
-          />
+          <SectionHeading eyebrow={about.valuesEyebrow} title={about.valuesTitle} />
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {trustPoints.map((point) => {
               const Icon = point.icon;
@@ -97,7 +88,11 @@ export default async function AboutPage() {
       </section>
 
       {/* Founders */}
-      <Founders />
+      <Founders
+        founders={about.founders}
+        eyebrow={about.foundersEyebrow}
+        title={about.foundersTitle}
+      />
     </>
   );
 }

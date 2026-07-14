@@ -1,7 +1,7 @@
 import Image from "next/image";
 import type { BlogPost } from "@/lib/blog";
 import { blocksToText } from "@/lib/blog-format";
-import { saveBlogPostAction } from "@/app/admin/actions";
+import { saveBlogPostAction } from "@/app/ecoshine_admin_panel/actions";
 import { cardCls, inputCls, labelCls, primaryBtnCls, textareaCls } from "@/components/admin/ui";
 
 export function BlogPostForm({

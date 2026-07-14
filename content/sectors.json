@@ -1,0 +1,100 @@
+{
+  "items": [
+    {
+      "name": "Corporate Offices & Commercial",
+      "slug": "corporate-offices-commercial",
+      "icon": "Building2",
+      "blurb": "Daily and periodic cleaning programs for corporate offices and commercial premises.",
+      "image": "/images/commercial-floor-cleaning-sydney.jpg",
+      "imageAlt": "Ecoshine cleaner in a corporate office space"
+    },
+    {
+      "name": "Transport & Logistics",
+      "slug": "transport-logistics",
+      "icon": "Truck",
+      "blurb": "Depot, fleet touchpoint and warehouse cleaning that keeps logistics moving.",
+      "image": "/images/ecoshine-brand-culture.jpg",
+      "imageAlt": "Ecoshine cleaner servicing a transport and logistics site"
+    },
+    {
+      "name": "Education & Childcare",
+      "slug": "education-childcare",
+      "icon": "GraduationCap",
+      "blurb": "Term-aligned cleaning built around child safety and school schedules.",
+      "image": "/images/ecoshine-cleaning-team.jpg",
+      "imageAlt": "Ecoshine cleaner in an education facility"
+    },
+    {
+      "name": "Industrial & Manufacturing",
+      "slug": "industrial-manufacturing",
+      "icon": "Factory",
+      "blurb": "Safety-first cleaning across plants, warehouses and production floors.",
+      "image": "/images/ecoshine-staff-portrait.jpg",
+      "imageAlt": "Ecoshine cleaner at an industrial manufacturing site"
+    },
+    {
+      "name": "Fitness & Lifestyle",
+      "slug": "fitness-lifestyle",
+      "icon": "Dumbbell",
+      "blurb": "Daily sanitisation of gyms, studios and high-contact fitness equipment.",
+      "image": "/images/ecoshine-team-member.jpg",
+      "imageAlt": "Ecoshine cleaner sanitising a fitness facility"
+    },
+    {
+      "name": "Retail & Hospitality",
+      "slug": "retail-hospitality",
+      "icon": "ShoppingBag",
+      "blurb": "Customer-facing cleaning for retail stores, pubs, clubs and restaurants.",
+      "image": "/images/office-cleaning-sydney.jpg",
+      "imageAlt": "Ecoshine cleaner in a retail and hospitality venue"
+    },
+    {
+      "name": "Healthcare & Aged Care",
+      "slug": "healthcare-aged-care",
+      "icon": "HeartPulse",
+      "blurb": "Hospitals, clinics, aged care facilities, and medical centres.",
+      "image": "/images/hospitality-cleaning-sydney.jpg",
+      "imageAlt": "Ecoshine cleaner in a healthcare facility"
+    },
+    {
+      "name": "Infrastructure & Data Centre",
+      "slug": "infrastructure-data-centre",
+      "icon": "Server",
+      "blurb": "Controlled, compliant cleaning for critical infrastructure and data centres.",
+      "image": "/images/commercial-window-cleaning-sydney.jpg",
+      "imageAlt": "Ecoshine cleaner at an infrastructure and data centre site"
+    },
+    {
+      "name": "Strata & Buildings",
+      "slug": "strata-buildings",
+      "icon": "Home",
+      "blurb": "Common area cleaning and maintenance for strata and residential buildings.",
+      "image": "/images/window-cleaning-opera-house.jpg",
+      "imageAlt": "Ecoshine cleaner maintaining a strata building common area"
+    },
+    {
+      "name": "Mining & Energy",
+      "slug": "mining-energy",
+      "icon": "Mountain",
+      "blurb": "Site-based cleaning and facility support for mining and energy operations.",
+      "image": "/images/strata-cleaning-sydney.jpg",
+      "imageAlt": "Ecoshine cleaner at a mining and energy site"
+    },
+    {
+      "name": "Government & Defense",
+      "slug": "government-defense",
+      "icon": "Landmark",
+      "blurb": "Vetted teams delivering compliant cleaning for government and defence sites.",
+      "image": "/images/ecoshine-uniform-harbour-bridge.jpg",
+      "imageAlt": "Ecoshine cleaner at a government building"
+    },
+    {
+      "name": "Events & Venue Cleaning",
+      "slug": "events-venue-cleaning",
+      "icon": "PartyPopper",
+      "blurb": "Rapid turnaround cleaning for events, venues and function spaces.",
+      "image": "/images/commercial-floor-cleaning-sydney.jpg",
+      "imageAlt": "Ecoshine cleaner preparing an events venue"
+    }
+  ]
+}

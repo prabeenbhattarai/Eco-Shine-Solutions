@@ -1,29 +1,8 @@
 import {
-  Building2,
-  GraduationCap,
-  UtensilsCrossed,
-  HeartPulse,
-  Landmark,
-  SprayCan,
-  HardHat,
   ShieldCheck,
   Leaf,
   BadgeCheck,
   ThumbsUp,
-  LayoutGrid,
-  Factory,
-  ShoppingBag,
-  PartyPopper,
-  Home,
-  Dumbbell,
-  Trees,
-  Droplets,
-  Wrench,
-  Trash2,
-  Waves,
-  Truck,
-  Server,
-  Mountain,
   Info,
   BookOpen,
   Users,
@@ -34,8 +13,6 @@ import {
   Briefcase,
   Images,
   HelpCircle,
-  Lock,
-  FileText,
   Award,
   UserCheck,
   SlidersHorizontal,
@@ -84,6 +61,9 @@ export type NavItem = {
     /** Slug for service/sector children so the navbar can resolve icons
         even after an admin renames the label. */
     slug?: string;
+    /** Icon key (from the icon registry) for admin-managed service/sector
+        children, so newly added items show their chosen icon in the menu. */
+    icon?: string;
   }[];
 };
 
@@ -98,17 +78,31 @@ export const serviceCategories = [
 ] as const;
 export type ServiceCategory = (typeof serviceCategories)[number];
 
+/* Optional per-page content overrides for a service or sector detail page.
+   Any field left blank falls back to the computed default at render time, so
+   admins only fill in what they want to customise. */
+export type DetailPageContent = {
+  intro?: string;
+  standardsEyebrow?: string;
+  standardsTitle?: string;
+  standardsText?: string;
+  standardsTagline?: string;
+  ctaTitle?: string;
+  ctaDescription?: string;
+};
+
 export type Service = {
   title: string;
   short: string;
   slug: string;
   href: string;
-  icon: LucideIcon;
+  icon: string;
   category: ServiceCategory;
   blurb: string;
   image: string;
   imageAlt: string;
   keyword: string;
+  page?: DetailPageContent;
 };
 
 export const services: Service[] = [
@@ -117,7 +111,7 @@ export const services: Service[] = [
     short: "Commercial & Corporate",
     slug: "commercial-corporate-cleaning",
     href: "/services/commercial-corporate-cleaning",
-    icon: Building2,
+    icon: "Building2",
     category: "Sector Programs",
     blurb: "Comprehensive daily cleaning with transparent reporting for corporate environments.",
     image: "/images/commercial-window-cleaning-sydney.jpg",
@@ -129,7 +123,7 @@ export const services: Service[] = [
     short: "Integrated Facility Services",
     slug: "integrated-facility-services",
     href: "/services/integrated-facility-services",
-    icon: LayoutGrid,
+    icon: "LayoutGrid",
     category: "Facilities Support",
     blurb: "Seamless integration of logistics, waste coordination and common area maintenance.",
     image: "/images/ecoshine-cleaning-team.jpg",
@@ -141,7 +135,7 @@ export const services: Service[] = [
     short: "Industrial & Manufacturing",
     slug: "industrial-manufacturing-cleaning",
     href: "/services/industrial-manufacturing-cleaning",
-    icon: Factory,
+    icon: "Factory",
     category: "Sector Programs",
     blurb: "Safety-first SOPs covering all plant, warehouse and production zoning.",
     image: "/images/ecoshine-brand-culture.jpg",
@@ -153,7 +147,7 @@ export const services: Service[] = [
     short: "Healthcare & Medical Centre",
     slug: "healthcare-medical-centre-cleaning",
     href: "/services/healthcare-medical-centre-cleaning",
-    icon: HeartPulse,
+    icon: "HeartPulse",
     category: "Sector Programs",
     blurb: "Clinical regimes and risk-based zoning aligned with strict medical standards.",
     image: "/images/window-cleaning-opera-house.jpg",
@@ -165,7 +159,7 @@ export const services: Service[] = [
     short: "Childcare & School",
     slug: "childcare-school-cleaning",
     href: "/services/childcare-school-cleaning",
-    icon: GraduationCap,
+    icon: "GraduationCap",
     category: "Sector Programs",
     blurb: "Specialised cleaning adhering to child safety practices and term schedules.",
     image: "/images/strata-cleaning-sydney.jpg",
@@ -177,7 +171,7 @@ export const services: Service[] = [
     short: "Hotels, Hospitality & Leisure",
     slug: "hotels-hospitality-leisure-cleaning",
     href: "/services/hotels-hospitality-leisure-cleaning",
-    icon: UtensilsCrossed,
+    icon: "UtensilsCrossed",
     category: "Sector Programs",
     blurb: "Specialised cleaning for hotels, pubs, clubs and restaurants.",
     image: "/images/ecoshine-uniform-harbour-bridge.jpg",
@@ -189,7 +183,7 @@ export const services: Service[] = [
     short: "Retail Cleaning",
     slug: "retail-cleaning",
     href: "/services/retail-cleaning",
-    icon: ShoppingBag,
+    icon: "ShoppingBag",
     category: "Sector Programs",
     blurb: "Routine cleaning and high-touch sanitisation for all customer-facing spaces.",
     image: "/images/commercial-floor-cleaning-sydney.jpg",
@@ -201,7 +195,7 @@ export const services: Service[] = [
     short: "Event & Venue",
     slug: "event-venue-cleaning",
     href: "/services/event-venue-cleaning",
-    icon: PartyPopper,
+    icon: "PartyPopper",
     category: "Sector Programs",
     blurb: "Rapid response and routine cleaning for all event and venue needs.",
     image: "/images/hospitality-cleaning-sydney.jpg",
@@ -213,7 +207,7 @@ export const services: Service[] = [
     short: "Strata & Residential",
     slug: "strata-residential-cleaning",
     href: "/services/strata-residential-cleaning",
-    icon: Home,
+    icon: "Home",
     category: "Sector Programs",
     blurb: "Cleaning and maintenance of residential common areas and property precincts.",
     image: "/images/ecoshine-staff-portrait.jpg",
@@ -225,7 +219,7 @@ export const services: Service[] = [
     short: "Gym & Fitness Facility",
     slug: "gym-fitness-facility-cleaning",
     href: "/services/gym-fitness-facility-cleaning",
-    icon: Dumbbell,
+    icon: "Dumbbell",
     category: "Sector Programs",
     blurb: "Targeted sanitisation and daily upkeep of high-contact fitness equipment.",
     image: "/images/ecoshine-team-member.jpg",
@@ -237,7 +231,7 @@ export const services: Service[] = [
     short: "Grounds & Garden",
     slug: "grounds-garden-maintenance",
     href: "/services/grounds-garden-maintenance",
-    icon: Trees,
+    icon: "Trees",
     category: "Grounds & Outdoor Services",
     blurb: "Complete maintenance, including mowing, trimming, seasonal programs and litter removal.",
     image: "/images/office-cleaning-sydney.jpg",
@@ -249,7 +243,7 @@ export const services: Service[] = [
     short: "Hygiene & Consumable Supply",
     slug: "hygiene-consumable-supply",
     href: "/services/hygiene-consumable-supply",
-    icon: Droplets,
+    icon: "Droplets",
     category: "Cleaning & Hygiene",
     blurb: "Supply of consumables, dispensers and complete washroom hygiene services.",
     image: "/images/hospitality-cleaning-sydney.jpg",
@@ -261,7 +255,7 @@ export const services: Service[] = [
     short: "Minor Repairs & Maintenance",
     slug: "minor-repairs-maintenance",
     href: "/services/minor-repairs-maintenance",
-    icon: Wrench,
+    icon: "Wrench",
     category: "Facilities Support",
     blurb: "Maintenance of common areas, focusing on rapid response and ongoing upkeep.",
     image: "/images/commercial-window-cleaning-sydney.jpg",
@@ -273,7 +267,7 @@ export const services: Service[] = [
     short: "End of Build & Construction",
     slug: "end-of-build-construction-cleaning",
     href: "/services/end-of-build-construction-cleaning",
-    icon: HardHat,
+    icon: "HardHat",
     category: "Specialised & Project Cleaning",
     blurb: "Final defect removal and meticulous handover cleaning after construction.",
     image: "/images/window-cleaning-opera-house.jpg",
@@ -285,7 +279,7 @@ export const services: Service[] = [
     short: "Carpet & Hard Floor Restoration",
     slug: "carpet-hard-floor-restoration",
     href: "/services/carpet-hard-floor-restoration",
-    icon: SprayCan,
+    icon: "SprayCan",
     category: "Specialised & Project Cleaning",
     blurb: "Restoration services including strip, seal, scrub and deep carpet extraction.",
     image: "/images/strata-cleaning-sydney.jpg",
@@ -297,7 +291,7 @@ export const services: Service[] = [
     short: "Deep Cleaning & Disinfection",
     slug: "deep-cleaning-disinfection",
     href: "/services/deep-cleaning-disinfection",
-    icon: ShieldCheck,
+    icon: "ShieldCheck",
     category: "Cleaning & Hygiene",
     blurb: "Scheduled deep cleaning programs, high dusting and targeted disinfection.",
     image: "/images/ecoshine-uniform-harbour-bridge.jpg",
@@ -309,7 +303,7 @@ export const services: Service[] = [
     short: "Bin Management & Waste Removal",
     slug: "bin-management-waste-removal",
     href: "/services/bin-management-waste-removal",
-    icon: Trash2,
+    icon: "Trash2",
     category: "Grounds & Outdoor Services",
     blurb: "Coordination and collection of internal and seasonal bulk waste streams.",
     image: "/images/commercial-floor-cleaning-sydney.jpg",
@@ -321,7 +315,7 @@ export const services: Service[] = [
     short: "Specialist & High Pressure",
     slug: "specialist-high-pressure-services",
     href: "/services/specialist-high-pressure-services",
-    icon: Waves,
+    icon: "Waves",
     category: "Specialised & Project Cleaning",
     blurb: "High-access facade work and pressure washing of hard external surfaces.",
     image: "/images/ecoshine-brand-culture.jpg",
@@ -362,17 +356,18 @@ export const founders: {
 export type Sector = {
   name: string;
   slug: string;
-  icon: LucideIcon;
+  icon: string;
   blurb: string;
   image: string;
   imageAlt: string;
+  page?: DetailPageContent;
 };
 
 export const sectors: Sector[] = [
   {
     name: "Corporate Offices & Commercial",
     slug: "corporate-offices-commercial",
-    icon: Building2,
+    icon: "Building2",
     blurb: "Daily and periodic cleaning programs for corporate offices and commercial premises.",
     image: "/images/commercial-floor-cleaning-sydney.jpg",
     imageAlt: "Ecoshine cleaner in a corporate office space",
@@ -380,7 +375,7 @@ export const sectors: Sector[] = [
   {
     name: "Transport & Logistics",
     slug: "transport-logistics",
-    icon: Truck,
+    icon: "Truck",
     blurb: "Depot, fleet touchpoint and warehouse cleaning that keeps logistics moving.",
     image: "/images/ecoshine-brand-culture.jpg",
     imageAlt: "Ecoshine cleaner servicing a transport and logistics site",
@@ -388,7 +383,7 @@ export const sectors: Sector[] = [
   {
     name: "Education & Childcare",
     slug: "education-childcare",
-    icon: GraduationCap,
+    icon: "GraduationCap",
     blurb: "Term-aligned cleaning built around child safety and school schedules.",
     image: "/images/ecoshine-cleaning-team.jpg",
     imageAlt: "Ecoshine cleaner in an education facility",
@@ -396,7 +391,7 @@ export const sectors: Sector[] = [
   {
     name: "Industrial & Manufacturing",
     slug: "industrial-manufacturing",
-    icon: Factory,
+    icon: "Factory",
     blurb: "Safety-first cleaning across plants, warehouses and production floors.",
     image: "/images/ecoshine-staff-portrait.jpg",
     imageAlt: "Ecoshine cleaner at an industrial manufacturing site",
@@ -404,7 +399,7 @@ export const sectors: Sector[] = [
   {
     name: "Fitness & Lifestyle",
     slug: "fitness-lifestyle",
-    icon: Dumbbell,
+    icon: "Dumbbell",
     blurb: "Daily sanitisation of gyms, studios and high-contact fitness equipment.",
     image: "/images/ecoshine-team-member.jpg",
     imageAlt: "Ecoshine cleaner sanitising a fitness facility",
@@ -412,7 +407,7 @@ export const sectors: Sector[] = [
   {
     name: "Retail & Hospitality",
     slug: "retail-hospitality",
-    icon: ShoppingBag,
+    icon: "ShoppingBag",
     blurb: "Customer-facing cleaning for retail stores, pubs, clubs and restaurants.",
     image: "/images/office-cleaning-sydney.jpg",
     imageAlt: "Ecoshine cleaner in a retail and hospitality venue",
@@ -420,7 +415,7 @@ export const sectors: Sector[] = [
   {
     name: "Healthcare & Aged Care",
     slug: "healthcare-aged-care",
-    icon: HeartPulse,
+    icon: "HeartPulse",
     blurb: "Hospitals, clinics, aged care facilities, and medical centres.",
     image: "/images/hospitality-cleaning-sydney.jpg",
     imageAlt: "Ecoshine cleaner in a healthcare facility",
@@ -428,7 +423,7 @@ export const sectors: Sector[] = [
   {
     name: "Infrastructure & Data Centre",
     slug: "infrastructure-data-centre",
-    icon: Server,
+    icon: "Server",
     blurb: "Controlled, compliant cleaning for critical infrastructure and data centres.",
     image: "/images/commercial-window-cleaning-sydney.jpg",
     imageAlt: "Ecoshine cleaner at an infrastructure and data centre site",
@@ -436,7 +431,7 @@ export const sectors: Sector[] = [
   {
     name: "Strata & Buildings",
     slug: "strata-buildings",
-    icon: Home,
+    icon: "Home",
     blurb: "Common area cleaning and maintenance for strata and residential buildings.",
     image: "/images/window-cleaning-opera-house.jpg",
     imageAlt: "Ecoshine cleaner maintaining a strata building common area",
@@ -444,7 +439,7 @@ export const sectors: Sector[] = [
   {
     name: "Mining & Energy",
     slug: "mining-energy",
-    icon: Mountain,
+    icon: "Mountain",
     blurb: "Site-based cleaning and facility support for mining and energy operations.",
     image: "/images/strata-cleaning-sydney.jpg",
     imageAlt: "Ecoshine cleaner at a mining and energy site",
@@ -452,7 +447,7 @@ export const sectors: Sector[] = [
   {
     name: "Government & Defense",
     slug: "government-defense",
-    icon: Landmark,
+    icon: "Landmark",
     blurb: "Vetted teams delivering compliant cleaning for government and defence sites.",
     image: "/images/ecoshine-uniform-harbour-bridge.jpg",
     imageAlt: "Ecoshine cleaner at a government building",
@@ -460,7 +455,7 @@ export const sectors: Sector[] = [
   {
     name: "Events & Venue Cleaning",
     slug: "events-venue-cleaning",
-    icon: PartyPopper,
+    icon: "PartyPopper",
     blurb: "Rapid turnaround cleaning for events, venues and function spaces.",
     image: "/images/commercial-floor-cleaning-sydney.jpg",
     imageAlt: "Ecoshine cleaner preparing an events venue",
@@ -545,18 +540,6 @@ export const exploreLinks: {
     href: "/#faq",
     icon: HelpCircle,
     description: "Quick answers to the questions we hear most.",
-  },
-  {
-    label: "Privacy Policy",
-    href: "/privacy-policy",
-    icon: Lock,
-    description: "How we collect, use and protect your information.",
-  },
-  {
-    label: "Terms & Conditions",
-    href: "/terms",
-    icon: FileText,
-    description: "The terms that apply when you book a clean with us.",
   },
 ];
 

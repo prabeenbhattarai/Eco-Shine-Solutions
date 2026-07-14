@@ -4,31 +4,28 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
-import {
-  services,
-  sectors,
-  overviewLinks,
-  exploreLinks,
-  type NavItem,
-} from "@/lib/site";
+import { overviewLinks, exploreLinks, type NavItem } from "@/lib/site";
+import { resolveIcon } from "@/lib/icons";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { QuoteButton } from "@/components/quote/quote-button";
 import type { LucideIcon } from "lucide-react";
 
-/* Icons stay code-defined. Slug lookup survives admin renames of service and
-   sector labels; label lookup covers the static overview/explore menus. */
-const iconBySlug: Record<string, LucideIcon> = Object.fromEntries([
-  ...services.map((s) => [s.slug, s.icon]),
-  ...sectors.map((s) => [s.slug, s.icon]),
-]);
+/* Overview/Explore children keep code-defined icons; service and sector
+   children carry an icon key (from the icon registry) that is resolved at
+   render time, so admin-added items show their chosen icon too. */
 const iconByLabel: Record<string, LucideIcon> = Object.fromEntries([
   ...overviewLinks.map((l) => [l.label, l.icon]),
   ...exploreLinks.map((l) => [l.label, l.icon]),
 ]);
 
-function childIcon(child: { label: string; slug?: string }): LucideIcon | undefined {
-  return child.slug ? iconBySlug[child.slug] : iconByLabel[child.label];
+function childIcon(child: {
+  label: string;
+  slug?: string;
+  icon?: string;
+}): LucideIcon | undefined {
+  if (child.icon || child.slug) return resolveIcon(child.icon);
+  return iconByLabel[child.label];
 }
 
 export function Navbar({
@@ -69,14 +66,21 @@ export function Navbar({
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header
-      className={`sticky top-0 z-50 w-full transition-all ${
-        scrolled
-          ? "border-b border-border bg-background/85 backdrop-blur-md"
-          : "border-b border-transparent bg-background"
-      }`}
-    >
-      <nav className="container-page flex h-16 items-center justify-between gap-4 lg:h-20">
+    <>
+      <header className="sticky top-0 z-50 w-full">
+        {/* Background lives on an inner layer, NOT on the sticky element itself:
+            applying backdrop-filter to a sticky/stacking element triggers an
+            iOS Safari compositing bug that makes the mobile menu overlay render
+            blank once the page is scrolled. Keeping it separate avoids that. */}
+        <div
+          aria-hidden="true"
+          className={`absolute inset-0 border-b transition-all ${
+            scrolled
+              ? "border-border bg-background/85 backdrop-blur-md"
+              : "border-transparent bg-background"
+          }`}
+        />
+      <nav className="container-page relative flex h-16 items-center justify-between gap-4 lg:h-20">
         <Logo />
 
         {/* Desktop nav */}
@@ -173,10 +177,12 @@ export function Navbar({
           </button>
         </div>
       </nav>
+      </header>
 
-      {/* Mobile slide-in menu */}
+      {/* Mobile slide-in menu - kept OUTSIDE <header> so the header's
+          backdrop-blur (a containing block for fixed elements) never clips it. */}
       <div
-        className={`fixed inset-0 z-50 lg:hidden ${open ? "" : "pointer-events-none"}`}
+        className={`fixed inset-0 z-[60] isolate lg:hidden ${open ? "" : "pointer-events-none"}`}
         aria-hidden={!open}
       >
         <div
@@ -186,7 +192,7 @@ export function Navbar({
           onClick={() => setOpen(false)}
         />
         <aside
-          className={`absolute right-0 top-0 flex h-full w-[88%] max-w-sm flex-col bg-background shadow-2xl transition-transform duration-300 ${
+          className={`absolute right-0 top-0 flex h-full max-h-dvh w-[88%] max-w-sm flex-col bg-background shadow-2xl transition-transform duration-300 ${
             open ? "translate-x-0" : "translate-x-full"
           }`}
         >
@@ -272,6 +278,6 @@ export function Navbar({
           </div>
         </aside>
       </div>
-    </header>
+    </>
   );
 }

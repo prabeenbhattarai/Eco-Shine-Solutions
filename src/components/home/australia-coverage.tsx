@@ -5,6 +5,7 @@ import Link from "next/link";
 import { MapPin, ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
 import { states, type ServedState } from "@/lib/site";
 import { HEX_POINTS } from "@/lib/hex-map";
+import type { SectionHeadingContent } from "@/lib/content";
 
 const HEX_SIZE = 12; // drawn radius, smaller than the 15px grid spacing so hexes sit apart
 
@@ -27,7 +28,13 @@ function statusColor(s: ServedState) {
   return s.status === "launching" ? "#f59e0b" : "#193cb9";
 }
 
-export function AustraliaCoverage({ serviceNames }: { serviceNames: { slug: string; short: string }[] }) {
+export function AustraliaCoverage({
+  serviceNames,
+  heading,
+}: {
+  serviceNames: { slug: string; short: string }[];
+  heading: SectionHeadingContent;
+}) {
   const [activeCode, setActiveCode] = useState("NSW");
   const active = states.find((s) => s.code === activeCode) ?? states[1];
 
@@ -63,15 +70,13 @@ export function AustraliaCoverage({ serviceNames }: { serviceNames: { slug: stri
       <div className="container-page">
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-sm font-semibold uppercase tracking-wide text-brand-600 dark:text-brand-300">
-            Where we clean
+            {heading.eyebrow}
           </span>
           <h2 className="mt-2 text-3xl font-bold text-foreground sm:text-4xl">
-            Eco cleaning across four states and territories
+            {heading.title}
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted">
-            From our New South Wales home base, Ecoshine now serves Western Australia
-            and Tasmania, with the ACT joining on 1 July 2026. Tap a location to see
-            the cities we cover.
+            {heading.description}
           </p>
         </div>
 

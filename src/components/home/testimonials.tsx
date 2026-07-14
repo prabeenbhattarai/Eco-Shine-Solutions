@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
+import type { SectionHeadingContent } from "@/lib/content";
 
 function initials(name: string) {
   return name
@@ -22,7 +23,13 @@ export type TestimonialItem = {
   text: string;
 };
 
-export function Testimonials({ items }: { items: TestimonialItem[] }) {
+export function Testimonials({
+  items,
+  heading,
+}: {
+  items: TestimonialItem[];
+  heading: SectionHeadingContent & { ratingLine: string };
+}) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
@@ -59,21 +66,21 @@ export function Testimonials({ items }: { items: TestimonialItem[] }) {
     <section className="py-20">
       <div className="container-page">
         <SectionHeading
-          eyebrow="Testimonials"
-          title="Trusted right across Australia"
-          description="Real feedback from the businesses and families we clean for every week."
+          eyebrow={heading.eyebrow}
+          title={heading.title}
+          description={heading.description}
         />
 
-        <div className="mt-4 flex items-center justify-center gap-2 text-sm font-medium text-muted">
-          <span className="flex items-center gap-0.5 text-amber-500">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="h-4 w-4 fill-current" />
-            ))}
-          </span>
-          <span>
-            <strong className="font-bold text-foreground">4.9 out of 5</strong> from 300+ reviews
-          </span>
-        </div>
+        {heading.ratingLine && (
+          <div className="mt-4 flex items-center justify-center gap-2 text-sm font-medium text-muted">
+            <span className="flex items-center gap-0.5 text-amber-500">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-4 w-4 fill-current" />
+              ))}
+            </span>
+            <span className="font-semibold text-foreground">{heading.ratingLine}</span>
+          </div>
+        )}
 
         <div
           className="relative mx-auto mt-10 max-w-4xl"

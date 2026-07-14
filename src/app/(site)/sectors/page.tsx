@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/page-hero";
 import { getSectors, getPageHero } from "@/lib/content";
+import { resolveIcon } from "@/lib/icons";
 
 export const metadata: Metadata = {
   title: "Sectors We Serve",
@@ -28,7 +29,7 @@ export default async function SectorsPage() {
       <section className="container-page py-16">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {sectors.map((s) => {
-            const Icon = s.icon;
+            const Icon = resolveIcon(s.icon);
             return (
               <Link
                 key={s.slug}

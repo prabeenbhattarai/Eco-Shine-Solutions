@@ -1,11 +1,220 @@
 {
-  "overrides": {
-    "retail-cleaning": {
+  "items": [
+    {
+      "title": "Commercial & Corporate Cleaning",
+      "short": "Commercial & Corporate",
+      "slug": "commercial-corporate-cleaning",
+      "href": "/services/commercial-corporate-cleaning",
+      "icon": "Building2",
+      "category": "Sector Programs",
+      "blurb": "Comprehensive daily cleaning with transparent reporting for corporate environments.",
+      "image": "/images/commercial-window-cleaning-sydney.jpg",
+      "imageAlt": "Ecoshine cleaner servicing a commercial office building",
+      "keyword": "commercial cleaning"
+    },
+    {
+      "title": "Integrated Facility Services",
+      "short": "Integrated Facility Services",
+      "slug": "integrated-facility-services",
+      "href": "/services/integrated-facility-services",
+      "icon": "LayoutGrid",
+      "category": "Facilities Support",
+      "blurb": "Seamless integration of logistics, waste coordination and common area maintenance.",
+      "image": "/images/ecoshine-cleaning-team.jpg",
+      "imageAlt": "Ecoshine facility services team coordinating a site clean",
+      "keyword": "facility management cleaning"
+    },
+    {
+      "title": "Industrial & Manufacturing Cleaning",
+      "short": "Industrial & Manufacturing",
+      "slug": "industrial-manufacturing-cleaning",
+      "href": "/services/industrial-manufacturing-cleaning",
+      "icon": "Factory",
+      "category": "Sector Programs",
+      "blurb": "Safety-first SOPs covering all plant, warehouse and production zoning.",
+      "image": "/images/ecoshine-brand-culture.jpg",
+      "imageAlt": "Ecoshine cleaner on an industrial site clean",
+      "keyword": "industrial cleaning"
+    },
+    {
+      "title": "Healthcare & Medical Centre Cleaning",
+      "short": "Healthcare & Medical Centre",
+      "slug": "healthcare-medical-centre-cleaning",
+      "href": "/services/healthcare-medical-centre-cleaning",
+      "icon": "HeartPulse",
+      "category": "Sector Programs",
+      "blurb": "Clinical regimes and risk-based zoning aligned with strict medical standards.",
+      "image": "/images/window-cleaning-opera-house.jpg",
+      "imageAlt": "Ecoshine cleaner sanitising clinical glass surfaces",
+      "keyword": "medical cleaning"
+    },
+    {
+      "title": "Childcare & School Cleaning",
+      "short": "Childcare & School",
+      "slug": "childcare-school-cleaning",
+      "href": "/services/childcare-school-cleaning",
+      "icon": "GraduationCap",
+      "category": "Sector Programs",
+      "blurb": "Specialised cleaning adhering to child safety practices and term schedules.",
+      "image": "/images/strata-cleaning-sydney.jpg",
+      "imageAlt": "Ecoshine cleaner sanitising an education facility interior",
+      "keyword": "school cleaning"
+    },
+    {
+      "title": "Hotels, Hospitality & Leisure Cleaning",
+      "short": "Hotels, Hospitality & Leisure",
+      "slug": "hotels-hospitality-leisure-cleaning",
+      "href": "/services/hotels-hospitality-leisure-cleaning",
+      "icon": "UtensilsCrossed",
+      "category": "Sector Programs",
+      "blurb": "Specialised cleaning for hotels, pubs, clubs and restaurants.",
+      "image": "/images/ecoshine-uniform-harbour-bridge.jpg",
+      "imageAlt": "Ecoshine cleaner detailing a hospitality venue",
+      "keyword": "hospitality cleaning"
+    },
+    {
       "title": "Retail Cleaning",
       "short": "Retail Cleaning",
+      "slug": "retail-cleaning",
+      "href": "/services/retail-cleaning",
+      "icon": "ShoppingBag",
+      "category": "Sector Programs",
       "blurb": "Routine cleaning and high-touch sanitisation for all customer-facing spaces.",
       "image": "/images/commercial-floor-cleaning-sydney.jpg",
-      "imageAlt": "Ecoshine cleaner polishing a retail store floor"
+      "imageAlt": "Ecoshine cleaner polishing a retail store floor",
+      "keyword": "retail cleaning"
+    },
+    {
+      "title": "Event & Venue Cleaning",
+      "short": "Event & Venue",
+      "slug": "event-venue-cleaning",
+      "href": "/services/event-venue-cleaning",
+      "icon": "PartyPopper",
+      "category": "Sector Programs",
+      "blurb": "Rapid response and routine cleaning for all event and venue needs.",
+      "image": "/images/hospitality-cleaning-sydney.jpg",
+      "imageAlt": "Ecoshine cleaner preparing a venue for an event",
+      "keyword": "event cleaning"
+    },
+    {
+      "title": "Strata & Residential Cleaning",
+      "short": "Strata & Residential",
+      "slug": "strata-residential-cleaning",
+      "href": "/services/strata-residential-cleaning",
+      "icon": "Home",
+      "category": "Sector Programs",
+      "blurb": "Cleaning and maintenance of residential common areas and property precincts.",
+      "image": "/images/ecoshine-staff-portrait.jpg",
+      "imageAlt": "Ecoshine cleaner maintaining a strata common area",
+      "keyword": "strata cleaning"
+    },
+    {
+      "title": "Gym & Fitness Facility Cleaning",
+      "short": "Gym & Fitness Facility",
+      "slug": "gym-fitness-facility-cleaning",
+      "href": "/services/gym-fitness-facility-cleaning",
+      "icon": "Dumbbell",
+      "category": "Sector Programs",
+      "blurb": "Targeted sanitisation and daily upkeep of high-contact fitness equipment.",
+      "image": "/images/ecoshine-team-member.jpg",
+      "imageAlt": "Ecoshine cleaner sanitising fitness equipment",
+      "keyword": "gym cleaning"
+    },
+    {
+      "title": "Grounds & Garden Maintenance",
+      "short": "Grounds & Garden",
+      "slug": "grounds-garden-maintenance",
+      "href": "/services/grounds-garden-maintenance",
+      "icon": "Trees",
+      "category": "Grounds & Outdoor Services",
+      "blurb": "Complete maintenance, including mowing, trimming, seasonal programs and litter removal.",
+      "image": "/images/office-cleaning-sydney.jpg",
+      "imageAlt": "Ecoshine grounds team maintaining an outdoor precinct",
+      "keyword": "grounds maintenance"
+    },
+    {
+      "title": "Hygiene & Consumable Supply",
+      "short": "Hygiene & Consumable Supply",
+      "slug": "hygiene-consumable-supply",
+      "href": "/services/hygiene-consumable-supply",
+      "icon": "Droplets",
+      "category": "Cleaning & Hygiene",
+      "blurb": "Supply of consumables, dispensers and complete washroom hygiene services.",
+      "image": "/images/hospitality-cleaning-sydney.jpg",
+      "imageAlt": "Ecoshine cleaner restocking washroom hygiene supplies",
+      "keyword": "washroom hygiene"
+    },
+    {
+      "title": "Minor Repairs & Maintenance",
+      "short": "Minor Repairs & Maintenance",
+      "slug": "minor-repairs-maintenance",
+      "href": "/services/minor-repairs-maintenance",
+      "icon": "Wrench",
+      "category": "Facilities Support",
+      "blurb": "Maintenance of common areas, focusing on rapid response and ongoing upkeep.",
+      "image": "/images/commercial-window-cleaning-sydney.jpg",
+      "imageAlt": "Ecoshine facilities team completing minor site repairs",
+      "keyword": "facility maintenance"
+    },
+    {
+      "title": "End of Build & Construction Cleaning",
+      "short": "End of Build & Construction",
+      "slug": "end-of-build-construction-cleaning",
+      "href": "/services/end-of-build-construction-cleaning",
+      "icon": "HardHat",
+      "category": "Specialised & Project Cleaning",
+      "blurb": "Final defect removal and meticulous handover cleaning after construction.",
+      "image": "/images/window-cleaning-opera-house.jpg",
+      "imageAlt": "Ecoshine cleaner on a post-construction handover clean",
+      "keyword": "construction cleaning"
+    },
+    {
+      "title": "Carpet & Hard Floor Restoration",
+      "short": "Carpet & Hard Floor Restoration",
+      "slug": "carpet-hard-floor-restoration",
+      "href": "/services/carpet-hard-floor-restoration",
+      "icon": "SprayCan",
+      "category": "Specialised & Project Cleaning",
+      "blurb": "Restoration services including strip, seal, scrub and deep carpet extraction.",
+      "image": "/images/strata-cleaning-sydney.jpg",
+      "imageAlt": "Ecoshine cleaner restoring a hard floor surface",
+      "keyword": "carpet cleaning"
+    },
+    {
+      "title": "Deep Cleaning & Disinfection",
+      "short": "Deep Cleaning & Disinfection",
+      "slug": "deep-cleaning-disinfection",
+      "href": "/services/deep-cleaning-disinfection",
+      "icon": "ShieldCheck",
+      "category": "Cleaning & Hygiene",
+      "blurb": "Scheduled deep cleaning programs, high dusting and targeted disinfection.",
+      "image": "/images/ecoshine-uniform-harbour-bridge.jpg",
+      "imageAlt": "Ecoshine cleaner performing a scheduled deep clean",
+      "keyword": "deep cleaning"
+    },
+    {
+      "title": "Bin Management & Waste Removal",
+      "short": "Bin Management & Waste Removal",
+      "slug": "bin-management-waste-removal",
+      "href": "/services/bin-management-waste-removal",
+      "icon": "Trash2",
+      "category": "Grounds & Outdoor Services",
+      "blurb": "Coordination and collection of internal and seasonal bulk waste streams.",
+      "image": "/images/commercial-floor-cleaning-sydney.jpg",
+      "imageAlt": "Ecoshine team coordinating waste and bin removal",
+      "keyword": "waste removal"
+    },
+    {
+      "title": "Specialist & High Pressure Services",
+      "short": "Specialist & High Pressure",
+      "slug": "specialist-high-pressure-services",
+      "href": "/services/specialist-high-pressure-services",
+      "icon": "Waves",
+      "category": "Specialised & Project Cleaning",
+      "blurb": "High-access facade work and pressure washing of hard external surfaces.",
+      "image": "/images/ecoshine-brand-culture.jpg",
+      "imageAlt": "Ecoshine cleaner pressure washing an exterior facade",
+      "keyword": "pressure washing"
     }
-  }
+  ]
 }

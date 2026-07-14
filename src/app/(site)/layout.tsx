@@ -2,7 +2,7 @@ import { Preloader } from "@/components/preloader";
 import { QuoteProvider } from "@/components/quote/quote-context";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { WhatsAppFloat } from "@/components/whatsapp-float";
+import { ScrollToTop } from "@/components/scroll-to-top";
 import { MobileCtaBar } from "@/components/mobile-cta-bar";
 import { getSettings, getServices, getSectors } from "@/lib/content";
 import { overviewLinks, exploreLinks, type NavItem } from "@/lib/site";
@@ -38,6 +38,7 @@ export default async function SiteLayout({
         href: s.href,
         description: s.blurb,
         slug: s.slug,
+        icon: s.icon,
       })),
     },
     {
@@ -48,6 +49,7 @@ export default async function SiteLayout({
         href: `/sectors/${s.slug}`,
         description: s.blurb,
         slug: s.slug,
+        icon: s.icon,
       })),
     },
     {
@@ -70,7 +72,7 @@ export default async function SiteLayout({
         <Navbar nav={nav} phone={settings.phone} phoneHref={settings.phoneHref} />
         <main className="flex-1">{children}</main>
         <Footer settings={settings} services={footerServices} />
-        <WhatsAppFloat whatsapp={settings.whatsapp} />
+        <ScrollToTop />
         <MobileCtaBar phoneHref={settings.phoneHref} />
         {/* Spacer so the fixed mobile CTA bar never covers footer content */}
         <div className="h-14 lg:hidden" aria-hidden="true" />

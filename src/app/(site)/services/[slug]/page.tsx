@@ -40,6 +40,17 @@ export default async function ServicePage({
     .slice(0, 3)
     .map((s) => ({ label: s.short, href: s.href }));
 
+  // Per-page overrides fall back to the computed defaults when left blank.
+  const p = service.page ?? {};
+  const base = serviceStandards[service.category];
+  const standards = {
+    ...base,
+    eyebrow: p.standardsEyebrow || base.eyebrow,
+    title: p.standardsTitle || base.title,
+    text: p.standardsText || base.text,
+    tagline: p.standardsTagline || base.tagline,
+  };
+
   return (
     <>
       <PageHero
@@ -52,15 +63,21 @@ export default async function ServicePage({
         ]}
       />
       <DetailPage
-        intro={`${service.blurb} Whether you need a one-off clean or an ongoing schedule, our eco-certified, insured and police-checked teams deliver consistent ${service.short.toLowerCase()} results across New South Wales, Western Australia, Tasmania and the ACT.`}
+        intro={
+          p.intro ||
+          `${service.blurb} Whether you need a one-off clean or an ongoing schedule, our eco-certified, insured and police-checked teams deliver consistent ${service.short.toLowerCase()} results across New South Wales, Western Australia, Tasmania and the ACT.`
+        }
         image={service.image}
         imageAlt={service.imageAlt}
         expertiseContext={service.short}
-        standards={serviceStandards[service.category]}
+        standards={standards}
         related={related}
         relatedLabel={`More ${service.category}`}
-        ctaTitle={`Ready to Book Your ${service.short} Clean?`}
-        ctaDescription="Tell us about your space and we'll send a tailored, no-obligation quote fast."
+        ctaTitle={p.ctaTitle || `Ready to Book Your ${service.short} Clean?`}
+        ctaDescription={
+          p.ctaDescription ||
+          "Tell us about your space and we'll send a tailored, no-obligation quote fast."
+        }
       />
     </>
   );

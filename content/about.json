@@ -1,0 +1,30 @@
+{
+  "storyEyebrow": "Our story",
+  "storyTitle": "Cleaning done properly, the eco-friendly way",
+  "storyBody1": "Ecoshine Solution was founded on a belief that professional cleaning and caring for the environment should go hand in hand. What started as a small Sydney team has grown into a trusted operation servicing New South Wales, Western Australia and Tasmania, with the ACT joining on 1 July 2026.",
+  "storyBody2": "Across childcare, healthcare, hospitality, industrial, community and government sites, we bring the same promise to every job: eco-certified products, insured and police-checked staff, and a finish we stand behind with our satisfaction guarantee.",
+  "storyImage": "/uploads/1783813665704-eco-43.jpg",
+  "storyImageAlt": "The Ecoshine Solution cleaning team in uniform by the Sydney Harbour Bridge",
+  "valuesEyebrow": "What we stand for",
+  "valuesTitle": "Values our clients can count on",
+  "foundersEyebrow": "Leadership",
+  "foundersTitle": "A Word From Our Founders",
+  "founders": [
+    {
+      "id": "founder-1",
+      "name": "Bikas Subedi",
+      "role": "Founder and CEO",
+      "quote": "Our mission has always been simple: to provide exceptional cleaning services that exceed expectations. Every client deserves a spotless environment where they can thrive, and that is exactly what we deliver.",
+      "image": "/images/founder-bikas-subedi.jpg",
+      "linkedin": "#"
+    },
+    {
+      "id": "founder-2",
+      "name": "Sandip Adhikari",
+      "role": "Founder and Managing Director",
+      "quote": "Quality and reliability are at the heart of everything we do. We have built our reputation on trust, and our team takes pride in maintaining the highest standards of cleanliness and customer service.",
+      "image": "",
+      "linkedin": "#"
+    }
+  ]
+}

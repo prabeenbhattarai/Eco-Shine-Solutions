@@ -10,31 +10,42 @@ import { Testimonials } from "@/components/home/testimonials";
 import { Faq } from "@/components/home/faq";
 import { LeadCapture } from "@/components/home/lead-capture";
 import { LocalBusinessJsonLd } from "@/components/json-ld";
-import { getServices, getTestimonials } from "@/lib/content";
+import { getHomepage, getServices, getTestimonials } from "@/lib/content";
 
 export default async function HomePage() {
-  const [services, testimonials] = await Promise.all([getServices(), getTestimonials()]);
-  const plainServices = services.map((s) => {
-    const { icon, ...rest } = s;
-    void icon;
-    return rest;
-  });
+  const [homepage, services, testimonials] = await Promise.all([
+    getHomepage(),
+    getServices(),
+    getTestimonials(),
+  ]);
+  // Services are fully serializable now (icon is a string key), so they pass
+  // straight to the client grid — icons resolve there via the registry.
+  const plainServices = services;
   const serviceNames = services.map((s) => ({ slug: s.slug, short: s.short }));
+
+  // A section renders unless the admin has explicitly toggled it off.
+  const show = (key: string) => homepage.visible[key] !== false;
 
   return (
     <>
       <LocalBusinessJsonLd />
       <Hero />
-      <ServicesGrid services={plainServices} />
-      <WhyChoose />
-      <OurDifference />
-      <AustraliaCoverage serviceNames={serviceNames} />
-      <HowItWorks />
-      <SatisfactionBand />
-      <WorkGallery />
-      <Testimonials items={testimonials} />
-      <Faq />
-      <LeadCapture />
+      {show("services") && (
+        <ServicesGrid services={plainServices} heading={homepage.services} />
+      )}
+      {show("whyChoose") && <WhyChoose content={homepage.whyChoose} />}
+      {show("ourDifference") && <OurDifference content={homepage.ourDifference} />}
+      {show("coverage") && (
+        <AustraliaCoverage serviceNames={serviceNames} heading={homepage.coverage} />
+      )}
+      {show("howItWorks") && <HowItWorks content={homepage.howItWorks} />}
+      {show("satisfaction") && <SatisfactionBand content={homepage.satisfaction} />}
+      {show("gallery") && <WorkGallery heading={homepage.gallery} />}
+      {show("testimonials") && (
+        <Testimonials items={testimonials} heading={homepage.testimonials} />
+      )}
+      {show("faq") && <Faq heading={homepage.faq} />}
+      {show("leadCapture") && <LeadCapture content={homepage.leadCapture} />}
     </>
   );
 }

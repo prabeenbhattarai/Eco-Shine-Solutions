@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "id": "wa",
+      "name": "Western Australia",
+      "status": "active",
+      "launchDate": "",
+      "isHq": false,
+      "tagline": "Commercial and office cleaning across the Perth metro.",
+      "cities": [
+        "Perth",
+        "Fremantle",
+        "Joondalup",
+        "Rockingham",
+        "Mandurah"
+      ]
+    },
+    {
+      "id": "nsw",
+      "name": "New South Wales",
+      "status": "active",
+      "launchDate": "",
+      "isHq": true,
+      "tagline": "Our home base, serving Sydney and the wider state since day one.",
+      "cities": [
+        "Sydney",
+        "Parramatta",
+        "North Sydney",
+        "Newcastle",
+        "Wollongong",
+        "Inner West"
+      ]
+    },
+    {
+      "id": "act",
+      "name": "Australian Capital Territory",
+      "status": "active",
+      "launchDate": "",
+      "isHq": false,
+      "tagline": "Now launching in Canberra. Be among our first ACT clients.",
+      "cities": [
+        "Canberra",
+        "Belconnen",
+        "Gungahlin",
+        "Woden",
+        "Tuggeranong"
+      ]
+    },
+    {
+      "id": "tas",
+      "name": "Tasmania",
+      "status": "active",
+      "launchDate": "",
+      "isHq": false,
+      "tagline": "Reliable eco cleaning for Hobart, Launceston and beyond.",
+      "cities": [
+        "Hobart",
+        "Launceston",
+        "Devonport",
+        "Burnie"
+      ]
+    }
+  ]
+}

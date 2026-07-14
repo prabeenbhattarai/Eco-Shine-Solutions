@@ -4,10 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Plus } from "lucide-react";
-import { services as staticServices } from "@/lib/site";
-import type { PlainService } from "@/lib/content";
-
-const iconBySlug = Object.fromEntries(staticServices.map((s) => [s.slug, s.icon]));
+import { iconRegistry, DEFAULT_ICON_KEY } from "@/lib/icons";
+import type { PlainService, SectionHeadingContent } from "@/lib/content";
 import { SectionHeading } from "@/components/section-heading";
 import { BrandSpinner } from "@/components/brand-spinner";
 
@@ -22,7 +20,7 @@ function ServiceCard({
   revealed?: boolean;
   index?: number;
 }) {
-  const Icon = iconBySlug[service.slug];
+  const Icon = iconRegistry[service.icon] ?? iconRegistry[DEFAULT_ICON_KEY];
   return (
     <Link
       href={service.href}
@@ -55,7 +53,13 @@ function ServiceCard({
   );
 }
 
-export function ServicesGrid({ services }: { services: PlainService[] }) {
+export function ServicesGrid({
+  services,
+  heading,
+}: {
+  services: PlainService[];
+  heading: SectionHeadingContent;
+}) {
   const [expanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -76,9 +80,9 @@ export function ServicesGrid({ services }: { services: PlainService[] }) {
     <section className="bg-surface py-20" id="services">
       <div className="container-page">
         <SectionHeading
-          eyebrow="What we do"
-          title="Cleaning services for every sector"
-          description="From childcare and healthcare to hospitality, industrial and government sites. One reliable team, eco-certified products, and our satisfaction guarantee on every job."
+          eyebrow={heading.eyebrow}
+          title={heading.title}
+          description={heading.description}
         />
 
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">

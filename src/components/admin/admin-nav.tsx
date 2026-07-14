@@ -15,6 +15,9 @@ import {
   Quote,
   HelpCircle,
   BadgeCheck,
+  Inbox,
+  Info,
+  MapPin,
   type LucideIcon,
 } from "lucide-react";
 
@@ -22,31 +25,36 @@ type NavLink = { href: string; label: string; icon: LucideIcon };
 
 const groups: { heading?: string; links: NavLink[] }[] = [
   {
-    links: [{ href: "/admin", label: "Dashboard", icon: LayoutDashboard }],
+    links: [
+      { href: "/ecoshine_admin_panel", label: "Dashboard", icon: LayoutDashboard },
+      { href: "/ecoshine_admin_panel/enquiries", label: "Enquiries", icon: Inbox },
+    ],
   },
   {
     heading: "Content",
     links: [
-      { href: "/admin/homepage", label: "Homepage", icon: Home },
-      { href: "/admin/pages", label: "Page Titles", icon: FileText },
-      { href: "/admin/services", label: "Services", icon: SprayCan },
-      { href: "/admin/sectors", label: "Sectors", icon: Building2 },
+      { href: "/ecoshine_admin_panel/homepage", label: "Homepage", icon: Home },
+      { href: "/ecoshine_admin_panel/about", label: "About Page", icon: Info },
+      { href: "/ecoshine_admin_panel/pages", label: "Page Titles", icon: FileText },
+      { href: "/ecoshine_admin_panel/services", label: "Services", icon: SprayCan },
+      { href: "/ecoshine_admin_panel/sectors", label: "Sectors", icon: Building2 },
+      { href: "/ecoshine_admin_panel/service-areas", label: "Service Areas", icon: MapPin },
     ],
   },
   {
     heading: "Collections",
     links: [
-      { href: "/admin/blog", label: "Blog", icon: Newspaper },
-      { href: "/admin/gallery", label: "Gallery", icon: Images },
-      { href: "/admin/jobs", label: "Jobs", icon: Briefcase },
-      { href: "/admin/testimonials", label: "Testimonials", icon: Quote },
-      { href: "/admin/faqs", label: "FAQs", icon: HelpCircle },
-      { href: "/admin/logos", label: "Trusted Logos", icon: BadgeCheck },
+      { href: "/ecoshine_admin_panel/blog", label: "Blog", icon: Newspaper },
+      { href: "/ecoshine_admin_panel/gallery", label: "Gallery", icon: Images },
+      { href: "/ecoshine_admin_panel/jobs", label: "Jobs", icon: Briefcase },
+      { href: "/ecoshine_admin_panel/testimonials", label: "Testimonials", icon: Quote },
+      { href: "/ecoshine_admin_panel/faqs", label: "FAQs", icon: HelpCircle },
+      { href: "/ecoshine_admin_panel/logos", label: "Trusted Logos", icon: BadgeCheck },
     ],
   },
   {
     heading: "Setup",
-    links: [{ href: "/admin/settings", label: "Settings", icon: Settings }],
+    links: [{ href: "/ecoshine_admin_panel/settings", label: "Settings", icon: Settings }],
   },
 ];
 
@@ -54,23 +62,23 @@ export function AdminNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex gap-1 overflow-x-auto lg:flex-col lg:gap-0">
+    <nav className="flex flex-col gap-1">
       {groups.map((group, gi) => (
-        <div key={gi} className="flex shrink-0 gap-1 lg:flex-col lg:gap-1">
+        <div key={gi} className="flex flex-col gap-1">
           {group.heading && (
-            <p className="hidden px-3.5 pb-1 pt-4 text-[11px] font-bold uppercase tracking-wider text-muted lg:block">
+            <p className="px-3.5 pb-1 pt-4 text-[11px] font-bold uppercase tracking-wider text-muted">
               {group.heading}
             </p>
           )}
           {group.links.map((link) => {
             const Icon = link.icon;
             const active =
-              link.href === "/admin" ? pathname === "/admin" : pathname.startsWith(link.href);
+              link.href === "/ecoshine_admin_panel" ? pathname === "/ecoshine_admin_panel" : pathname.startsWith(link.href);
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`inline-flex shrink-0 items-center gap-2.5 rounded-btn px-3.5 py-2.5 text-sm font-semibold transition-colors ${
+                className={`inline-flex items-center gap-2.5 rounded-btn px-3.5 py-2.5 text-sm font-semibold transition-colors ${
                   active ? "bg-brand-600 text-white" : "text-foreground hover:bg-surface-2"
                 }`}
               >

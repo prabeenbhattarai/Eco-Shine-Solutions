@@ -157,7 +157,7 @@ const defaultHomepage: HomepageContent = {
     titleHighlight: "Commercial Cleaning",
     titlePost: "Across Australia",
     description:
-      "From childcare and healthcare to hospitality, offices and government sites, our trusted local teams deliver eco-certified cleans using plant-based products. Now servicing New South Wales, Western Australia and Tasmania, with the ACT launching 1 July 2026.",
+      "From childcare and healthcare to hospitality, offices and government sites, our trusted local teams deliver eco-certified cleans using plant-based products. Now servicing New South Wales, Queensland, Western Australia and Tasmania, with the ACT launching 1 July 2026.",
     image: "/images/hero-window-cleaning-sydney.jpg",
     imageAlt: "Ecoshine cleaner delivering eco-friendly commercial cleaning",
     ratingValue: "4.9 out of 5",
@@ -193,9 +193,9 @@ const defaultHomepage: HomepageContent = {
   },
   coverage: {
     eyebrow: "Where we clean",
-    title: "Eco cleaning across four states and territories",
+    title: "Eco cleaning across five states and territories",
     description:
-      "From our New South Wales home base, Ecoshine now serves Western Australia and Tasmania, with the ACT joining on 1 July 2026. Tap a location to see the cities we cover.",
+      "From our New South Wales home base, Ecoshine now serves Queensland, Western Australia and Tasmania, with the ACT joining on 1 July 2026. Tap a location to see the cities we cover.",
   },
   howItWorks: {
     eyebrow: "How it works",
@@ -335,7 +335,7 @@ const defaultAbout: AboutContent = {
   storyEyebrow: "Our story",
   storyTitle: "Cleaning done properly, the eco-friendly way",
   storyBody1:
-    "Ecoshine Solution was founded on a belief that professional cleaning and caring for the environment should go hand in hand. What started as a small Sydney team has grown into a trusted operation servicing New South Wales, Western Australia and Tasmania, with the ACT joining on 1 July 2026.",
+    "Ecoshine Solution was founded on a belief that professional cleaning and caring for the environment should go hand in hand. What started as a small Sydney team has grown into a trusted operation servicing New South Wales, Queensland, Western Australia and Tasmania, with the ACT joining on 1 July 2026.",
   storyBody2:
     "Across childcare, healthcare, hospitality, industrial, community and government sites, we bring the same promise to every job: eco-certified products, insured and police-checked staff, and a finish we stand behind with our satisfaction guarantee.",
   storyImage: "/images/ecoshine-cleaning-team.jpg",
@@ -505,9 +505,11 @@ export async function getFaqs(): Promise<FaqItem[]> {
 export type TrustedLogo = { src: string; name: string };
 
 const defaultTrustedLogos: TrustedLogo[] = [
-  { name: "OnePlayground", src: "/images/logos/oneplayground.png" },
-  { name: "M Collective", src: "/images/logos/m-logo.png" },
-  { name: "Jetstar", src: "/images/logos/jetstar.png" },
+  { name: "Progress Facilities Management", src: "/images/logos/progress-fm.png" },
+  { name: "Real Health Medical Centre", src: "/images/logos/real-health.png" },
+  { name: "Sydney City College of Management", src: "/images/logos/sydney-city-college.png" },
+  { name: "White Spot Group", src: "/images/logos/white-spot-group.png" },
+  { name: "SAJO", src: "/images/logos/sajo.png" },
 ];
 
 export async function getTrustedLogos(): Promise<TrustedLogo[]> {

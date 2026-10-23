@@ -630,6 +630,17 @@ export const states: ServedState[] = [
     labelDy: -10,
   },
   {
+    code: "QLD",
+    name: "Queensland",
+    status: "active",
+    tagline: "Now servicing Brisbane and South East Queensland.",
+    cities: ["Brisbane", "Gold Coast", "Sunshine Coast", "Logan", "Ipswich"],
+    cx: 690,
+    cy: 324,
+    labelDx: 32,
+    labelDy: -14,
+  },
+  {
     code: "ACT",
     name: "Australian Capital Territory",
     status: "launching",
@@ -893,7 +904,7 @@ export const advantages = [
   "Eco-certified, low-tox products",
   "Fully insured and police-checked",
   "Same-day and after-hours options",
-  "Trusted across four states and territories",
+  "Trusted across five states and territories",
 ];
 
 /* Honest, verifiable stats for the "Our Difference" homepage banner. */
@@ -1008,7 +1019,7 @@ export const faqs: { question: string; answer: string }[] = [
   {
     question: "Which areas does Ecoshine Solution service?",
     answer:
-      "We currently service New South Wales, Western Australia and Tasmania, with the Australian Capital Territory launching 1 July 2026. See our Service Areas page for the specific cities and suburbs we cover.",
+      "We currently service New South Wales, Queensland, Western Australia and Tasmania, with the Australian Capital Territory launching 1 July 2026. See our Service Areas page for the specific cities and suburbs we cover.",
   },
   {
     question: "Are your cleaning products actually eco-friendly?",

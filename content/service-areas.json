@@ -32,6 +32,21 @@
       ]
     },
     {
+      "id": "qld",
+      "name": "Queensland",
+      "status": "active",
+      "launchDate": "",
+      "isHq": false,
+      "tagline": "Now servicing Brisbane and South East Queensland.",
+      "cities": [
+        "Brisbane",
+        "Gold Coast",
+        "Sunshine Coast",
+        "Logan",
+        "Ipswich"
+      ]
+    },
+    {
       "id": "act",
       "name": "Australian Capital Territory",
       "status": "active",

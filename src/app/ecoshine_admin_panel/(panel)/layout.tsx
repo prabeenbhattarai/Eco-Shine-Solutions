@@ -1,5 +1,6 @@
 import { requireAdmin } from "@/lib/admin-auth";
 import { logoutAction } from "@/app/ecoshine_admin_panel/actions";
+import { getSubmissions } from "@/lib/content";
 import { AdminShell } from "@/components/admin/admin-shell";
 
 export default async function AdminPanelLayout({
@@ -7,5 +8,12 @@ export default async function AdminPanelLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   await requireAdmin();
 
-  return <AdminShell logoutAction={logoutAction}>{children}</AdminShell>;
+  const submissions = await getSubmissions();
+  const unreadEnquiries = submissions.filter((s) => !s.read).length;
+
+  return (
+    <AdminShell logoutAction={logoutAction} unreadEnquiries={unreadEnquiries}>
+      {children}
+    </AdminShell>
+  );
 }

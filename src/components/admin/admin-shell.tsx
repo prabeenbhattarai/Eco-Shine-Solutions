@@ -13,9 +13,11 @@ import { Logo } from "@/components/logo";
 export function AdminShell({
   children,
   logoutAction,
+  unreadEnquiries = 0,
 }: {
   children: React.ReactNode;
   logoutAction: () => void;
+  unreadEnquiries?: number;
 }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -64,7 +66,7 @@ export function AdminShell({
           <Logo />
         </div>
         <div className="-mx-1 flex-1 overflow-y-auto px-1">
-          <AdminNav />
+          <AdminNav unreadEnquiries={unreadEnquiries} />
         </div>
         {footer}
       </aside>
@@ -97,7 +99,7 @@ export function AdminShell({
             </button>
           </div>
           <div className="-mx-1 flex-1 overflow-y-auto px-1">
-            <AdminNav />
+            <AdminNav unreadEnquiries={unreadEnquiries} />
           </div>
           {footer}
         </aside>
@@ -109,11 +111,18 @@ export function AdminShell({
         <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border bg-background px-4 lg:hidden">
           <button
             type="button"
-            aria-label="Open menu"
+            aria-label={
+              unreadEnquiries > 0 ? `Open menu (${unreadEnquiries} unread enquiries)` : "Open menu"
+            }
             onClick={() => setOpen(true)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-btn border border-border text-foreground"
+            className="relative inline-flex h-10 w-10 items-center justify-center rounded-btn border border-border text-foreground"
           >
             <Menu className="h-5 w-5" />
+            {unreadEnquiries > 0 && (
+              <span className="absolute -right-1 -top-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white">
+                {unreadEnquiries > 9 ? "9+" : unreadEnquiries}
+              </span>
+            )}
           </button>
           <Logo />
         </header>

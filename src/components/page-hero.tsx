@@ -15,7 +15,7 @@ export function PageHero({
       <div className="absolute -top-24 -right-16 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
       <div className="absolute -bottom-28 -left-16 h-72 w-72 rounded-full bg-black/10 blur-3xl" />
 
-      <div className="container-page relative pb-16 pt-12 sm:pb-20 sm:pt-16 lg:pb-24 lg:pt-20">
+      <div className="container-page relative pb-16 pt-28 sm:pb-20 lg:pb-24 lg:pt-32">
         {breadcrumb && (
           <nav aria-label="Breadcrumb" className="mb-4">
             <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/70">

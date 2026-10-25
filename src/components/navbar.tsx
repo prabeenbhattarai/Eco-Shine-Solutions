@@ -65,118 +65,136 @@ export function Navbar({
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
+  // Link colours adapt: dark/brand inside the scrolled pill, white over the
+  // transparent hero at the top.
+  const linkCls = (active: boolean) =>
+    `inline-flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${
+      scrolled
+        ? active
+          ? "text-brand-600 dark:text-brand-300"
+          : "text-foreground hover:text-brand-600 dark:hover:text-brand-300"
+        : active
+          ? "text-white"
+          : "text-white/85 hover:text-white"
+    }`;
+
+  const burgerCls = scrolled
+    ? "border-border bg-card text-foreground hover:bg-surface-2"
+    : "border-white/25 bg-white/10 text-white hover:bg-white/20";
+
   return (
     <>
-      <header className="sticky top-0 z-50 w-full">
-        {/* Background lives on an inner layer, NOT on the sticky element itself:
-            applying backdrop-filter to a sticky/stacking element triggers an
-            iOS Safari compositing bug that makes the mobile menu overlay render
-            blank once the page is scrolled. Keeping it separate avoids that. */}
+      <header className="fixed inset-x-0 top-0 z-50 flex justify-center">
+        {/* Subtle top scrim keeps the white nav readable over bright heroes;
+            fades out once the solid pill takes over. */}
         <div
           aria-hidden="true"
-          className={`absolute inset-0 border-b transition-all ${
-            scrolled
-              ? "border-border bg-background/85 backdrop-blur-md"
-              : "border-transparent bg-background"
+          className={`pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/30 to-transparent transition-opacity duration-300 ${
+            scrolled ? "opacity-0" : "opacity-100"
           }`}
         />
-      <nav className="container-page relative flex h-16 items-center justify-between gap-4 lg:h-20">
-        <Logo />
 
-        {/* Desktop nav */}
-        <ul className="hidden items-center gap-1 lg:flex">
-          {nav.map((item) =>
-            item.children ? (
-              <li key={item.label} className="group relative">
-                <Link
-                  href={item.href}
-                  className={`inline-flex items-center gap-1 rounded-btn px-3 py-2 text-sm font-medium transition-colors hover:text-brand-600 dark:hover:text-brand-300 ${
-                    isActive(item.href) ? "text-brand-600 dark:text-brand-300" : "text-foreground"
-                  }`}
-                >
-                  {item.label}
-                  <ChevronDown className="h-4 w-4 transition-transform group-hover:rotate-180" />
-                </Link>
-                <div className="invisible absolute left-1/2 top-full w-[42rem] max-w-[calc(100vw-2rem)] -translate-x-1/2 pt-5 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-                  <div className="rounded-card border border-border bg-card p-3 shadow-lg shadow-black/5">
-                    <p className="px-1.5 pb-2 text-xs font-bold uppercase tracking-wide text-muted">
-                      {item.label}
-                    </p>
-                    <div className="grid grid-cols-2 gap-1">
-                      {item.children.slice(0, 7).map((child) => {
-                        const ChildIcon = childIcon(child);
-                        return (
-                          <Link
-                            key={child.label}
-                            href={child.href}
-                            className="flex items-start gap-3 rounded-lg p-2.5 transition-colors hover:bg-surface-2"
-                          >
-                            {ChildIcon && (
-                              <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-600/15 dark:text-brand-300">
-                                <ChildIcon className="h-5 w-5" />
-                              </span>
-                            )}
-                            <span className="min-w-0">
-                              <span className="block text-sm font-semibold text-foreground">
-                                {child.label}
-                              </span>
-                              {child.description && (
-                                <span className="mt-0.5 block text-xs leading-snug text-muted">
-                                  {child.description}
-                                </span>
-                              )}
-                            </span>
-                          </Link>
-                        );
-                      })}
-                      {item.children.length > 7 && (
-                        <Link
-                          href={item.href}
-                          className="flex items-center justify-center gap-1.5 rounded-lg p-2.5 text-sm font-semibold text-brand-600 transition-colors hover:bg-surface-2 dark:text-brand-300"
-                        >
-                          View all {item.href.replace("/", "")}
-                          <ChevronDown className="h-4 w-4 -rotate-90" />
-                        </Link>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </li>
-            ) : (
-              <li key={item.label}>
-                <Link
-                  href={item.href}
-                  className={`rounded-btn px-3 py-2 text-sm font-medium transition-colors hover:text-brand-600 dark:hover:text-brand-300 ${
-                    isActive(item.href) ? "text-brand-600 dark:text-brand-300" : "text-foreground"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            )
-          )}
-        </ul>
-
-        {/* Desktop actions */}
-        <div className="hidden items-center gap-2 lg:flex">
-          <ThemeToggle />
-          <QuoteButton size="sm">Get a Free Quote</QuoteButton>
-        </div>
-
-        {/* Mobile actions */}
-        <div className="flex items-center gap-2 lg:hidden">
-          <ThemeToggle />
-          <button
-            type="button"
-            aria-label="Open menu"
-            aria-expanded={open}
-            onClick={() => setOpen(true)}
-            className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-btn border border-border bg-card text-foreground"
+        {/* The bar: full-width + transparent at the top, a centred floating pill
+            once scrolled. */}
+        <div
+          className={`relative transition-all duration-300 ease-out ${
+            scrolled
+              ? "mt-2.5 w-[min(68rem,calc(100%-1.5rem))] rounded-full border border-border bg-background/80 shadow-lg shadow-black/5 backdrop-blur-md"
+              : "w-full"
+          }`}
+        >
+          <nav
+            className={`grid grid-cols-[1fr_auto_1fr] items-center gap-2 transition-all duration-300 ${
+              scrolled ? "h-14 px-3 sm:px-5" : "container-page h-16 lg:h-20"
+            }`}
           >
-            <Menu className="h-6 w-6" />
-          </button>
+            {/* Left: logo */}
+            <div className="col-start-1 flex items-center justify-self-start">
+              <Logo light={!scrolled} />
+            </div>
+
+            {/* Centre: desktop menus */}
+            <ul className="col-start-2 hidden items-center justify-center gap-0.5 justify-self-center lg:flex">
+              {nav.map((item) =>
+                item.children ? (
+                  <li key={item.label} className="group relative">
+                    <Link href={item.href} className={linkCls(isActive(item.href))}>
+                      {item.label}
+                      <ChevronDown className="h-4 w-4 transition-transform group-hover:rotate-180" />
+                    </Link>
+                    <div className="invisible absolute left-1/2 top-full w-[42rem] max-w-[calc(100vw-2rem)] -translate-x-1/2 pt-5 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
+                      <div className="rounded-card border border-border bg-card p-3 shadow-lg shadow-black/5">
+                        <p className="px-1.5 pb-2 text-xs font-bold uppercase tracking-wide text-muted">
+                          {item.label}
+                        </p>
+                        <div className="grid grid-cols-2 gap-1">
+                          {item.children.slice(0, 7).map((child) => {
+                            const ChildIcon = childIcon(child);
+                            return (
+                              <Link
+                                key={child.label}
+                                href={child.href}
+                                className="flex items-start gap-3 rounded-lg p-2.5 transition-colors hover:bg-surface-2"
+                              >
+                                {ChildIcon && (
+                                  <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-600/15 dark:text-brand-300">
+                                    <ChildIcon className="h-5 w-5" />
+                                  </span>
+                                )}
+                                <span className="min-w-0">
+                                  <span className="block text-sm font-semibold text-foreground">
+                                    {child.label}
+                                  </span>
+                                  {child.description && (
+                                    <span className="mt-0.5 block text-xs leading-snug text-muted">
+                                      {child.description}
+                                    </span>
+                                  )}
+                                </span>
+                              </Link>
+                            );
+                          })}
+                          {item.children.length > 7 && (
+                            <Link
+                              href={item.href}
+                              className="flex items-center justify-center gap-1.5 rounded-lg p-2.5 text-sm font-semibold text-brand-600 transition-colors hover:bg-surface-2 dark:text-brand-300"
+                            >
+                              View all {item.href.replace("/", "")}
+                              <ChevronDown className="h-4 w-4 -rotate-90" />
+                            </Link>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                ) : (
+                  <li key={item.label}>
+                    <Link href={item.href} className={linkCls(isActive(item.href))}>
+                      {item.label}
+                    </Link>
+                  </li>
+                )
+              )}
+            </ul>
+
+            {/* Right: actions */}
+            <div className="col-start-3 flex items-center justify-end gap-2 justify-self-end">
+              <ThemeToggle light={!scrolled} />
+              <QuoteButton size="sm" className="hidden lg:inline-flex">
+                Get a Free Quote
+              </QuoteButton>
+              <button
+                type="button"
+                aria-label="Open menu"
+                aria-expanded={open}
+                onClick={() => setOpen(true)}
+                className={`inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-btn border transition-colors lg:hidden ${burgerCls}`}
+              >
+                <Menu className="h-6 w-6" />
+              </button>
+            </div>
+          </nav>
         </div>
-      </nav>
       </header>
 
       {/* Mobile slide-in menu - kept OUTSIDE <header> so the header's

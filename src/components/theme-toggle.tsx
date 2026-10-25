@@ -4,7 +4,14 @@ import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 
-export function ThemeToggle({ className = "" }: { className?: string }) {
+export function ThemeToggle({
+  className = "",
+  light = false,
+}: {
+  className?: string;
+  /** Transparent white style for use over a dark hero. */
+  light?: boolean;
+}) {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -19,7 +26,11 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       type="button"
       aria-label="Toggle dark mode"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className={`inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-btn border border-border bg-card text-foreground transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${className}`}
+      className={`inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-btn border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+        light
+          ? "border-white/25 bg-white/10 text-white hover:bg-white/20"
+          : "border-border bg-card text-foreground hover:bg-surface-2"
+      } ${className}`}
     >
       {mounted ? (
         isDark ? (

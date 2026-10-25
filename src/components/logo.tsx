@@ -9,9 +9,12 @@ import { site } from "@/lib/site";
 export function Logo({
   className = "",
   showWordmark = true,
+  light = false,
 }: {
   className?: string;
   showWordmark?: boolean;
+  /** White wordmark for use over a dark hero (transparent navbar). */
+  light?: boolean;
 }) {
   return (
     <Link
@@ -29,10 +32,18 @@ export function Logo({
       />
       {showWordmark && (
         <span className="flex flex-col leading-none">
-          <span className="font-display text-lg font-bold uppercase tracking-tight text-foreground">
+          <span
+            className={`font-display text-lg font-bold uppercase tracking-tight ${
+              light ? "text-white" : "text-foreground"
+            }`}
+          >
             Ecoshine
           </span>
-          <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
+          <span
+            className={`text-[11px] font-semibold uppercase tracking-[0.2em] ${
+              light ? "text-white/70" : "text-muted"
+            }`}
+          >
             Solution
           </span>
         </span>

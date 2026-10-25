@@ -1,5 +1,9 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { site } from "@/lib/site";
+import { BreadcrumbJsonLd } from "@/components/json-ld";
+
+const BASE = site.url.replace(/\/$/, "");
 
 export function PageHero({
   title,
@@ -12,6 +16,14 @@ export function PageHero({
 }) {
   return (
     <section className="relative overflow-hidden bg-brand-600">
+      {breadcrumb && breadcrumb.length > 0 && (
+        <BreadcrumbJsonLd
+          items={breadcrumb.map((c) => ({
+            name: c.label,
+            url: c.href ? `${BASE}${c.href}` : undefined,
+          }))}
+        />
+      )}
       <div className="absolute -top-24 -right-16 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
       <div className="absolute -bottom-28 -left-16 h-72 w-72 rounded-full bg-black/10 blur-3xl" />
 

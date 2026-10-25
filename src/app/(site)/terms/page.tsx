@@ -6,7 +6,8 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Terms & Conditions",
   description:
-    "Service delivery terms, cancellation policy, liability and payment terms for Ecoshine Solution cleaning services.",
+    "Service delivery terms, cancellation policy, liability and payment terms for Ecoshine Solution commercial cleaning services.",
+  alternates: { canonical: "/terms" },
 };
 
 const LAST_UPDATED = "1 July 2026";

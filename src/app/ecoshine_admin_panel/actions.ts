@@ -144,7 +144,6 @@ export async function saveHomepageAction(formData: FormData) {
   const current = await getHomepage();
 
   const err = validateAll(
-    required(field(formData, "badge"), "Badge text"),
     required(field(formData, "titlePre"), "Heading (first part)"),
     required(field(formData, "titleHighlight"), "Heading (highlighted part)"),
     required(field(formData, "description"), "Description"),
@@ -202,7 +201,7 @@ export async function saveHomepageAction(formData: FormData) {
 
   await writeContent("homepage", {
     hero: {
-      badge: field(formData, "badge") || current.hero.badge,
+      badge: field(formData, "badge"),
       titlePre: field(formData, "titlePre") || current.hero.titlePre,
       titleHighlight: field(formData, "titleHighlight") || current.hero.titleHighlight,
       titlePost: field(formData, "titlePost") || current.hero.titlePost,

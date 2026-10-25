@@ -5,9 +5,10 @@ import { ContactForm } from "@/components/contact-form";
 import { getPageHero, getSettings } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Contact Ecoshine Solution Sydney",
+  title: "Contact — Sydney Commercial Cleaners",
   description:
-    "Get in touch with Ecoshine Solution across NSW, WA, TAS and ACT. Call, WhatsApp or message us and we reply within 2 hours during business hours.",
+    "Contact Ecoshine Solution for commercial cleaning in Sydney and Australia-wide. Call 0451 930 257, WhatsApp or message us — we reply within 2 hours during business hours.",
+  alternates: { canonical: "/contact" },
 };
 
 function websiteLabel(url: string): string {

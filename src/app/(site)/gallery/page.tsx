@@ -4,9 +4,10 @@ import { GalleryGrid } from "@/components/gallery-grid";
 import { getGallery, getPageHero } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Gallery",
+  title: "Our Work Gallery — Ecoshine Cleaning Teams",
   description:
-    "Photos of the uniformed, eco-certified Ecoshine Solution cleaning teams at work across NSW, WA, TAS and ACT.",
+    "Photos of the uniformed, eco-certified Ecoshine Solution commercial cleaning teams at work across Sydney and Australia.",
+  alternates: { canonical: "/gallery" },
 };
 
 export default async function GalleryPage() {

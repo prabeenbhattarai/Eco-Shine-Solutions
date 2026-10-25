@@ -1,51 +1,181 @@
-import { states, site } from "@/lib/site";
+import { states, site, services, serviceAreas } from "@/lib/site";
 
-/** LocalBusiness structured data injected into the homepage <head>/body for rich results. */
-export function LocalBusinessJsonLd() {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: site.name,
-    description: site.description,
-    url: site.url,
-    telephone: "+61451930257",
-    priceRange: "$$",
-    image: `${site.url}/og-image.jpg`,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Sydney",
-      addressRegion: "NSW",
-      addressCountry: "AU",
-    },
-    areaServed: states.map((s) => ({
-      "@type": "AdministrativeArea",
-      name: s.name,
-    })),
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "07:00",
-        closes: "18:00",
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Saturday",
-        opens: "08:00",
-        closes: "16:00",
-      },
-    ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "300",
-    },
-  };
+/* Structured data (JSON-LD) for SEO, local/GEO ranking and AEO (answer engines
+   like Google AI Overviews, ChatGPT and Perplexity read these graphs). */
 
+const BASE = site.url.replace(/\/$/, "");
+const ORG_ID = `${BASE}/#business`;
+const PHONE = site.phoneHref.replace("tel:", "");
+
+/** Renders a JSON-LD script, escaping `<` so content can never break out of
+    the <script> tag. */
+function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data).replace(/</g, "\\u003c"),
+      }}
+    />
+  );
+}
+
+/** The business entity — the anchor for local/GEO ranking. */
+export function LocalBusinessJsonLd() {
+  const sameAs = Object.values(site.social).filter((u) => u && u !== "#");
+  return (
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": ["LocalBusiness", "CleaningService"],
+        "@id": ORG_ID,
+        name: site.name,
+        legalName: site.legalName,
+        description: site.description,
+        url: BASE,
+        telephone: PHONE,
+        email: site.email,
+        image: `${BASE}/og-image.jpg`,
+        logo: `${BASE}/images/ecoshine-logo-mark.png`,
+        priceRange: "$$",
+        currenciesAccepted: "AUD",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Unit 5, 71-83 Asquith Street",
+          addressLocality: "Silverwater",
+          addressRegion: "NSW",
+          postalCode: "2128",
+          addressCountry: "AU",
+        },
+        geo: { "@type": "GeoCoordinates", latitude: -33.833, longitude: 151.047 },
+        areaServed: [
+          ...states.map((s) => ({ "@type": "AdministrativeArea", name: s.name })),
+          ...serviceAreas.map((c) => ({ "@type": "City", name: `${c}, Australia` })),
+        ],
+        openingHoursSpecification: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            opens: "07:00",
+            closes: "18:00",
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: "Saturday",
+            opens: "08:00",
+            closes: "16:00",
+          },
+        ],
+        knowsAbout: services.map((s) => s.keyword),
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Commercial cleaning services",
+          itemListElement: services.map((s) => ({
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: s.title,
+              serviceType: s.keyword,
+            },
+          })),
+        },
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.9",
+          reviewCount: "300",
+        },
+        ...(sameAs.length ? { sameAs } : {}),
+      }}
+    />
+  );
+}
+
+/** Site-level WebSite entity. */
+export function WebsiteJsonLd() {
+  return (
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": `${BASE}/#website`,
+        url: BASE,
+        name: site.name,
+        inLanguage: "en-AU",
+        publisher: { "@id": ORG_ID },
+      }}
+    />
+  );
+}
+
+/** Service schema for a single service page (rich results + AEO). */
+export function ServiceJsonLd({
+  name,
+  description,
+  serviceType,
+  url,
+}: {
+  name: string;
+  description: string;
+  serviceType: string;
+  url: string;
+}) {
+  return (
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name,
+        description,
+        serviceType,
+        url,
+        provider: { "@id": ORG_ID },
+        areaServed: states.map((s) => ({ "@type": "AdministrativeArea", name: s.name })),
+      }}
+    />
+  );
+}
+
+/** FAQ schema — surfaces Q&A directly in Google and feeds answer engines. */
+export function FaqJsonLd({
+  faqs,
+}: {
+  faqs: { question: string; answer: string }[];
+}) {
+  if (faqs.length === 0) return null;
+  return (
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: { "@type": "Answer", text: f.answer },
+        })),
+      }}
+    />
+  );
+}
+
+/** Breadcrumb trail for inner pages. */
+export function BreadcrumbJsonLd({
+  items,
+}: {
+  items: { name: string; url?: string }[];
+}) {
+  if (items.length === 0) return null;
+  return (
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: items.map((it, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: it.name,
+          ...(it.url ? { item: it.url } : {}),
+        })),
+      }}
     />
   );
 }

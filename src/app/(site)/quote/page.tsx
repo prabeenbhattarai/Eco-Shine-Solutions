@@ -4,9 +4,10 @@ import { getPageHero } from "@/lib/content";
 import { QuoteForm } from "@/components/quote/quote-form";
 
 export const metadata: Metadata = {
-  title: "Get a Free Cleaning Quote",
+  title: "Free Commercial Cleaning Quote — Sydney & Australia",
   description:
-    "Request a free, no-obligation cleaning quote from Ecoshine Solution across NSW, WA, TAS and ACT. Tell us about your space and we respond within 2 hours.",
+    "Request a free, no-obligation commercial cleaning quote from Ecoshine Solution across Sydney and Australia. Tell us about your space — we respond within 2 hours.",
+  alternates: { canonical: "/quote" },
 };
 
 export default async function QuotePage() {

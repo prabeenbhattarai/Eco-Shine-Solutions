@@ -20,8 +20,9 @@ export async function generateMetadata({
   const sector = sectors.find((s) => s.slug === slug);
   if (!sector) return {};
   return {
-    title: `${sector.name} Cleaning Services`,
-    description: `${sector.blurb} Eco-certified, insured and police-checked commercial cleaning from Ecoshine Solution across NSW, WA, TAS and ACT.`,
+    title: `${sector.name} Cleaning Sydney`,
+    description: `${sector.blurb} Eco-certified, insured and police-checked commercial cleaning from Ecoshine Solution across Sydney and Australia.`,
+    alternates: { canonical: `/sectors/${sector.slug}` },
   };
 }
 

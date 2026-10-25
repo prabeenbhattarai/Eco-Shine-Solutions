@@ -8,9 +8,10 @@ import { ButtonLink } from "@/components/ui/button";
 import { trustPoints } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About Ecoshine Solution",
+  title: "About Us — Sydney Commercial Cleaning Company",
   description:
-    "Learn about Ecoshine Solution, an eco-conscious, professional and affordable cleaning team serving NSW, WA, TAS and ACT. Insured, police-checked and BSCAA-aligned.",
+    "Ecoshine Solution is an eco-conscious, insured and police-checked commercial cleaning company serving Sydney and Australia-wide. Meet the team behind the clean.",
+  alternates: { canonical: "/about" },
 };
 
 export default async function AboutPage() {

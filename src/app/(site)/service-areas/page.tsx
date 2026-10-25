@@ -5,9 +5,10 @@ import { getPageHero, getServiceAreas } from "@/lib/content";
 import { PageCta } from "@/components/page-cta";
 
 export const metadata: Metadata = {
-  title: "Cleaning Service Areas in NSW, WA, TAS and ACT",
+  title: "Cleaning Service Areas — Sydney, NSW, QLD, WA & TAS",
   description:
-    "Ecoshine Solution provides eco-friendly commercial cleaning across New South Wales, Queensland, Western Australia and Tasmania, with the ACT launching 1 July 2026.",
+    "Eco-friendly commercial cleaning across Sydney, New South Wales, Queensland (Brisbane), Western Australia and Tasmania, with the ACT launching in 2026.",
+  alternates: { canonical: "/service-areas" },
 };
 
 export default async function ServiceAreasPage() {

@@ -84,15 +84,26 @@
 }
 
 @layer components {
+  /* Full-width content with comfortable gutters that scale up on larger
+     screens (no fixed max-width, so sections span the viewport). */
   .container-page {
     width: 100%;
-    max-width: 80rem;
     margin-inline: auto;
     padding-inline: 1.25rem;
   }
+  @media (min-width: 640px) {
+    .container-page {
+      padding-inline: 1.5rem;
+    }
+  }
   @media (min-width: 1024px) {
     .container-page {
-      padding-inline: 2rem;
+      padding-inline: 2.5rem;
+    }
+  }
+  @media (min-width: 1536px) {
+    .container-page {
+      padding-inline: 4rem;
     }
   }
 

@@ -38,7 +38,7 @@ export const site = {
   email: "info@ecoshinesolution.com.au",
   whatsapp: "https://wa.me/61451930257",
   abn: "Registered Australian business",
-  address: "Sydney, NSW, Australia",
+  address: "Unit 5, 71-83 Asquith Street, Silverwater NSW 2128",
   hours: [
     { day: "Monday to Friday", time: "7:00am to 6:00pm" },
     { day: "Saturday", time: "8:00am to 4:00pm" },

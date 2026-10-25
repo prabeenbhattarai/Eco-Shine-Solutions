@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/page-hero";
 import { DetailPage } from "@/components/detail-page";
-import { serviceStandards } from "@/lib/site";
+import { ServiceJsonLd } from "@/components/json-ld";
+import { serviceStandards, site } from "@/lib/site";
 import { getServices } from "@/lib/content";
 
 export async function generateStaticParams() {
@@ -20,8 +21,9 @@ export async function generateMetadata({
   const service = services.find((s) => s.slug === slug);
   if (!service) return {};
   return {
-    title: service.title,
-    description: `${service.blurb} Eco-certified, insured cleaners across NSW, WA, TAS and ACT. Get a free quote from Ecoshine Solution.`,
+    title: `${service.title} Sydney`,
+    description: `${service.blurb} Eco-certified, insured and police-checked cleaners across Sydney and Australia — free quotes from Ecoshine Solution.`,
+    alternates: { canonical: `/services/${service.slug}` },
   };
 }
 
@@ -53,6 +55,12 @@ export default async function ServicePage({
 
   return (
     <>
+      <ServiceJsonLd
+        name={`${service.title} Sydney`}
+        description={service.blurb}
+        serviceType={service.keyword}
+        url={`${site.url.replace(/\/$/, "")}/services/${service.slug}`}
+      />
       <PageHero
         title={service.title}
         subtitle={service.blurb}

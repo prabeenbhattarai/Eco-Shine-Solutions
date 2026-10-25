@@ -97,10 +97,10 @@ export function Navbar({
         {/* The bar: full-width + transparent at the top, a centred floating pill
             once scrolled. */}
         <div
-          className={`relative transition-all duration-300 ease-out ${
+          className={`relative rounded-full border transition-all duration-300 ease-out ${
             scrolled
-              ? "mt-2.5 w-[min(68rem,calc(100%-1.5rem))] rounded-full border border-border bg-background/80 shadow-lg shadow-black/5 backdrop-blur-md"
-              : "w-full"
+              ? "mt-2.5 w-[min(68rem,calc(100%-1.5rem))] border-border bg-background/80 shadow-lg shadow-black/5 backdrop-blur-md"
+              : "mt-0 w-full border-transparent bg-transparent shadow-none"
           }`}
         >
           <nav

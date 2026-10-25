@@ -4,9 +4,10 @@ import { getPageHero, getServices } from "@/lib/content";
 import { ServicesExplorer } from "./services-explorer";
 
 export const metadata: Metadata = {
-  title: "Cleaning Services Sydney",
+  title: "Commercial Cleaning Services Sydney",
   description:
-    "Explore Ecoshine Solution cleaning services across NSW, WA, TAS and ACT: commercial, strata, post-construction and home detailing. Eco-certified, insured, free quotes.",
+    "Commercial cleaning services across Sydney & Australia: office, strata, industrial, medical, childcare and builders cleans. Eco-certified, insured — free quotes.",
+  alternates: { canonical: "/services" },
 };
 
 export default async function ServicesPage() {

@@ -22,7 +22,19 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await getBlogPost(slug);
   if (!post) return {};
-  return { title: post.title, description: post.excerpt };
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: `/blog/${post.slug}` },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.excerpt,
+      url: `${site.url.replace(/\/$/, "")}/blog/${post.slug}`,
+      images: [{ url: post.image, alt: post.imageAlt }],
+      publishedTime: post.date,
+    },
+  };
 }
 
 function Block({ block }: { block: BlogBlock }) {

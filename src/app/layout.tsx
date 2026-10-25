@@ -17,28 +17,45 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
+const DEFAULT_TITLE = "Commercial Cleaning Sydney & Australia | Ecoshine Solution";
+const DEFAULT_DESCRIPTION =
+  "Eco-friendly commercial & office cleaning across Sydney and Australia. Insured, police-checked, eco-certified teams. No lock-in contracts — free quotes within 2 hours.";
+const OG_IMAGE = {
+  url: "/og-image.jpg",
+  width: 1200,
+  height: 630,
+  alt: "Ecoshine Solution — eco-friendly commercial cleaning across Sydney and Australia",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | ${site.tagline}`,
+    default: DEFAULT_TITLE,
     template: `%s | ${site.name}`,
   },
-  description: site.description,
+  description: DEFAULT_DESCRIPTION,
   keywords: seoKeywords,
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_AU",
     url: site.url,
     siteName: site.name,
-    title: `${site.name} | ${site.tagline}`,
-    description: site.description,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} | ${site.tagline}`,
-    description: site.description,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: ["/og-image.jpg"],
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
 };
 
 export default function RootLayout({

@@ -6,9 +6,10 @@ import { getSectors, getPageHero } from "@/lib/content";
 import { resolveIcon } from "@/lib/icons";
 
 export const metadata: Metadata = {
-  title: "Sectors We Serve",
+  title: "Cleaning by Industry Sector — Sydney & Australia",
   description:
-    "Ecoshine Solution delivers tailored, compliant cleaning programs across corporate, healthcare, education, retail, industrial and government sectors in Australia.",
+    "Tailored, compliant cleaning programs for corporate, healthcare, education, retail, industrial and government sectors across Sydney and Australia. Eco-certified & insured.",
+  alternates: { canonical: "/sectors" },
 };
 
 export default async function SectorsPage() {

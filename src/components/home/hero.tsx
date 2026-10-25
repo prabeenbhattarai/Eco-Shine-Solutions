@@ -29,10 +29,12 @@ export async function Hero() {
 
         <div className="container-page relative">
           <div className="max-w-xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
-              <Leaf className="h-3.5 w-3.5" />
-              {hero.badge}
-            </span>
+            {hero.badge.trim() && (
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+                <Leaf className="h-3.5 w-3.5" />
+                {hero.badge}
+              </span>
+            )}
 
             <h1 className="mt-5 text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
               {hero.titlePre}{" "}

@@ -9,14 +9,15 @@ import { WorkGallery } from "@/components/home/work-gallery";
 import { Testimonials } from "@/components/home/testimonials";
 import { Faq } from "@/components/home/faq";
 import { LeadCapture } from "@/components/home/lead-capture";
-import { LocalBusinessJsonLd } from "@/components/json-ld";
-import { getHomepage, getServices, getTestimonials } from "@/lib/content";
+import { LocalBusinessJsonLd, WebsiteJsonLd, FaqJsonLd } from "@/components/json-ld";
+import { getHomepage, getServices, getTestimonials, getFaqs } from "@/lib/content";
 
 export default async function HomePage() {
-  const [homepage, services, testimonials] = await Promise.all([
+  const [homepage, services, testimonials, faqs] = await Promise.all([
     getHomepage(),
     getServices(),
     getTestimonials(),
+    getFaqs(),
   ]);
   // Services are fully serializable now (icon is a string key), so they pass
   // straight to the client grid — icons resolve there via the registry.
@@ -29,6 +30,8 @@ export default async function HomePage() {
   return (
     <>
       <LocalBusinessJsonLd />
+      <WebsiteJsonLd />
+      <FaqJsonLd faqs={faqs} />
       <Hero />
       {show("services") && (
         <ServicesGrid services={plainServices} heading={homepage.services} />

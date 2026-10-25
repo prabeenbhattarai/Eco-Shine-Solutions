@@ -102,7 +102,7 @@ export default async function AdminHomepagePage({
         <fieldset className={cardCls}>
           <legend className={legendCls}>Hero</legend>
           <div className="mt-2 space-y-4">
-            <Text name="badge" label="Badge text" defaultValue={hero.badge} required />
+            <Text name="badge" label="Badge text (optional — leave blank to hide)" defaultValue={hero.badge} />
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
               <Text name="titlePre" label="Heading, first part" defaultValue={hero.titlePre} required />
               <Text name="titleHighlight" label="Heading, highlighted part" defaultValue={hero.titleHighlight} required />

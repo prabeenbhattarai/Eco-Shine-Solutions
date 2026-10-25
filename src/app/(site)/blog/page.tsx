@@ -7,9 +7,10 @@ import { Reveal } from "@/components/reveal";
 import { getBlogPosts, getPageHero } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Cleaning Insights & Guides",
+  title: "Commercial Cleaning Tips, Guides & News",
   description:
-    "Practical commercial cleaning guides from the Ecoshine Solution team: office schedules, eco products, childcare compliance, strata scopes and more.",
+    "Practical commercial cleaning guides from Ecoshine Solution: office cleaning schedules, eco products, childcare compliance and strata scopes for Sydney businesses.",
+  alternates: { canonical: "/blog" },
 };
 
 export default async function BlogPage() {

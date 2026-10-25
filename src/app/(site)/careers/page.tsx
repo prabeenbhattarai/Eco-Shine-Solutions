@@ -5,9 +5,10 @@ import { Reveal } from "@/components/reveal";
 import { getJobs, getPageHero, getSettings } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Careers at Ecoshine Solution",
+  title: "Cleaning Jobs & Careers — Sydney & Australia",
   description:
-    "Join the Ecoshine Solution team. Eco-certified, insured and police-checked cleaning roles across NSW, WA, TAS and ACT.",
+    "Join the Ecoshine Solution team. Eco-certified, insured and police-checked commercial cleaning roles across Sydney and Australia.",
+  alternates: { canonical: "/careers" },
 };
 
 export default async function CareersPage() {
